@@ -12,5 +12,13 @@
             "homepage": "http://azonmedia.com",
             "role": "Developer"
         }
-    ]
+    ],
+    "require": {
+        "azonmedia/guzaba2": "dev-master",
+        "psr/log": "^1.1",
+        "azonmedia/swoole-to-psr": "dev-master",
+        "azonmedia/psr-to-swoole": "dev-master"
+    },
+    "minimum-stability": "dev"
+    
 }
