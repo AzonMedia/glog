@@ -16,13 +16,26 @@ class ServingMiddleware extends Base
 implements MiddlewareInterface
 {
 
-    public function __construct()
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    public function __construct(array $options = [])
     {
         parent::__construct();
+
+        if (!isset($options['log_dir'])) {
+            $options['log_dir'] = getcwd().'/../data/';
+        }
+        $this->options = $options;
     }
 
     public function process(ServerRequestInterface $Request, RequestHandlerInterface $Handler) : ResponseInterface
     {
+        //for testing
+        file_put_contents($this->options['log_dir'].'log.txt', time().' '.$Request->getBody()->read(8196).PHP_EOL, FILE_APPEND);//add the POST content
+
         $Body = new Stream();
         $output = ['code' => 1, 'message' => 'Log entry added'];
         $json_output = json_encode($output);
