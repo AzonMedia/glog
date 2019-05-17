@@ -16,8 +16,7 @@
     "require": {
         "azonmedia/guzaba2": "dev-master",
         "psr/log": "^1.1",
-        "azonmedia/swoole-to-psr": "dev-master",
-        "azonmedia/psr-to-swoole": "dev-master"
+        "monolog/monolog": "^2.0@dev"
     },
     "minimum-stability": "dev"
     
