@@ -25,12 +25,16 @@ require_once('../../vendor/autoload.php');
 //but will be overriden by the env vars if they exist
 //the env vars have GLOG_ prefix and are all caps
 //GLOG_SWOOLE_HOST
+/*
 const APP_CONFIG = [
     'swoole_host'       => '0.0.0.0',
     'swoole_port'       => 8081,
     'worker_num'        => 4,//http workers
     'task_worker_num'   => 8,//tasks workers
+    'data_dir'          => './data/',
+    'log_dir'           => './logs/',
 ];
+*/
 
 
 (function(){
@@ -61,37 +65,7 @@ const APP_CONFIG = [
 
     //past this point it is possible to autoload Application specific classes
 
-
-
-    /*
-    $Bootstrap = function() : int
-    {
-
-
-        $middlewares = [];
-//    $middlewares[] = new RoutingMiddleware();
-//    $middlewares[] = new FilteringMiddleware();
-//    $middlewares[] = new AuthorizationMiddleware();
-//    $middlewares[] = new ExecutorMiddleware();
-
-
-
-        //custom middleware for the app
-        $ServingMiddleware = new ServingMiddleware();//this serves all requests
-        $middlewares[] = $ServingMiddleware;
-
-        $RequestHandler = new \Guzaba2\Swoole\RequestHandler($middlewares);
-        $HttpServer = new \Guzaba2\Swoole\Server(APP_CONFIG['swoole_host'], APP_CONFIG['swoole_port'], []);
-        $HttpServer->on('request', $RequestHandler);
-        $HttpServer->start();
-
-        return self::EXIT_SUCCESS;
-    };
-    */
-    new Glog();
-
-
-    //Kernel::run($Bootstrap);
+    new Glog($app_directory);
 
     chdir($initial_directory);
 })();
