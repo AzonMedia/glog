@@ -20,7 +20,9 @@ class LogEntry extends Base
 
     public function __construct(string $json_data)
     {
-        $this->entry_data = json_decode($json_data);
+        $entry_data = json_decode($json_data);
+        //$this->entry_data = $entry_data ?? ['message' => 'parsing json failed'];
+        $this->entry_data = $entry_data ?? ['message' => $json_data];//if the decoding failed just put as message the provided string
         $this->accepted_microtime = microtime(TRUE);
     }
 

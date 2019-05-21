@@ -19,9 +19,9 @@ use Guzaba2\Kernel\Kernel;
 class Glog extends Base
 {
     protected const CONFIG_DEFAULTS = [
-        'swoole' => [
-            'host'       => '0.0.0.0',
-            'port'       => 8081,
+        'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
+            'host'              => '0.0.0.0',
+            'port'              => 8081,
             'worker_num'        => 4,//http workers
             'task_worker_num'   => 8,//tasks workers
         ],
