@@ -26,7 +26,7 @@ implements MiddlewareInterface
         parent::__construct();
 
         if (!isset($options['log_dir'])) {
-            $options['log_dir'] = getcwd().'/../data/';
+            $options['log_dir'] = getcwd().'/data/';
         }
         $this->options = $options;
     }
