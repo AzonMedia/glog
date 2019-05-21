@@ -13,18 +13,29 @@ class LogEntry extends Base
     protected $entry_data;
 
     /**
-     * When the log entry was created (which is different from when the actual event occurred)
+     * When the log entry was accepted for logging (which is different from when the actual event occurred which is provided in the json_data)
      * @var int
      */
-    protected $created_time;
+    protected $accepted_microtime;
 
     public function __construct(string $json_data)
     {
         $this->entry_data = json_decode($json_data);
+        $this->accepted_microtime = microtime(TRUE);
     }
 
     public function __toString() : string
     {
         return print_r($this->entry_data, TRUE);
+    }
+
+    public function get_data() : array
+    {
+        return $this->entry_data;
+    }
+
+    public function get_accepted_microtime() : float
+    {
+        return $this->accepted_microtime;
     }
 }
