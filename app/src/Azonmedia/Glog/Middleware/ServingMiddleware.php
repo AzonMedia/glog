@@ -27,7 +27,7 @@ implements MiddlewareInterface
      */
     protected $HttpServer;
 
-    public function __construct(array $options = [], Server $HttpServer)
+    public function __construct(Server $HttpServer, array $options = [])
     {
         parent::__construct();
 

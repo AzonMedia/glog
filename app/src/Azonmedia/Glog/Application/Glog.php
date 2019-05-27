@@ -6,17 +6,24 @@ use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Azonmedia\Glog\Storage\StorageProviderFile;
 use Azonmedia\Glog\Tasks\FinishHandler;
 use Azonmedia\Glog\Tasks\TaskHandler;
+use Azonmedia\Routing\Router;
+use Azonmedia\Routing\RoutingMapArray;
+use Azonmedia\UrlRewriting\Rewriter;
+use Azonmedia\UrlRewriting\RewritingRulesArray;
+use Guzaba2\Application\Application;
 use Guzaba2\Base\Base;
 use Guzaba2\Http\Body\Stream;
 use Guzaba2\Http\StatusCode;
 use Guzaba2\Kernel\Kernel;
+use Guzaba2\Http\RewritingMiddleware;
+use Guzaba2\Mvc\RoutingMiddleware;
 
 /**
  * Class Glog
  * This is a configuration file. Has no methods and can not be instantiated
  * @package Azonmedia\Glog\Application
  */
-class Glog extends Base
+class Glog extends Application
 {
     protected const CONFIG_DEFAULTS = [
         'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
@@ -39,7 +46,7 @@ class Glog extends Base
         parent::__construct();
 
         $this->app_directory = $app_directory;
-
+print_r(Application::$CONFIG_RUNTIME);
         Kernel::run($this);
     }
 
@@ -55,12 +62,21 @@ class Glog extends Base
 //    $middlewares[] = new FilteringMiddleware();
 //    $middlewares[] = new AuthorizationMiddleware();
 //    $middlewares[] = new ExecutorMiddleware();
+        //PresenterMiddleware
 
 
         $HttpServer = new \Guzaba2\Swoole\Server(self::$CONFIG_RUNTIME['swoole']['host'], self::$CONFIG_RUNTIME['swoole']['port'], self::$CONFIG_RUNTIME['swoole']);
 
+        $Rewriter = new Rewriter(new RewritingRulesArray([]));
+        $RewritingMiddleware = new RewritingMiddleware($HttpServer, $Rewriter);
+
+        $Router = new Router(new RoutingMapArray([]));
+        $RoutingMiddleware = new RoutingMiddleware($HttpServer, $Router);
+
         //custom middleware for the app
-        $ServingMiddleware = new ServingMiddleware([], $HttpServer);//this serves all requests
+        $ServingMiddleware = new ServingMiddleware($HttpServer, []);//this serves all requests
+        $middlewares[] = $RewritingMiddleware;
+        $middlewares[] = $RoutingMiddleware;
         $middlewares[] = $ServingMiddleware;
 
         $DefaultResponseBody = new Stream();
