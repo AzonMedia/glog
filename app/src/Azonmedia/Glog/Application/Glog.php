@@ -3,6 +3,8 @@
 namespace Azonmedia\Glog\Application;
 
 
+use Azonmedia\Glog\Home\Controllers\Home;
+use Azonmedia\Glog\LogEntries\Controllers\LogEntry;
 use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Azonmedia\Glog\Storage\StorageProviderFile;
 //use Azonmedia\Glog\Tasks\FinishHandler;
@@ -14,11 +16,14 @@ use Azonmedia\UrlRewriting\RewritingRulesArray;
 use Guzaba2\Application\Application;
 //use Guzaba2\Base\Base;
 use Guzaba2\Http\Body\Stream;
+use Guzaba2\Http\Method;
 use Guzaba2\Http\StatusCode;
 use Guzaba2\Kernel\Kernel;
 use Guzaba2\Http\RewritingMiddleware;
+use Guzaba2\Mvc\ExecutorMiddleware;
 use Guzaba2\Mvc\RoutingMiddleware;
 use Guzaba2\Swoole\ApplicationMiddleware;
+use Guzaba2\Mvc\RestMiddleware;
 
 /**
  * Class Glog
@@ -71,19 +76,39 @@ class Glog extends Application
         $HttpServer = new \Guzaba2\Swoole\Server(self::$CONFIG_RUNTIME['swoole']['host'], self::$CONFIG_RUNTIME['swoole']['port'], self::$CONFIG_RUNTIME['swoole']);
 
         $ApplicationMiddleware = new ApplicationMiddleware();//blocks static content
+        $RestMiddleware = new RestMiddleware();
 
         $Rewriter = new Rewriter(new RewritingRulesArray([]));
         $RewritingMiddleware = new RewritingMiddleware($HttpServer, $Rewriter);
 
-        $Router = new Router(new RoutingMapArray([]));
+        $routing_table = [
+            '/'             => [
+                Method::HTTP_GET        => [Home::class, 'view'],
+            ],
+            '/log-entry'    => [
+                Method::HTTP_GET        => [LogEntry::class, 'view'],
+                Method::HTTP_POST       => [LogEntry::class, 'create'],
+                Method::HTTP_PUT        => [LogEntry::class, 'update'],
+                Method::HTTP_DELETE     => [LogEntry::class, 'delete'],
+                //Method::HTTP_HEAD       => [LogEntry::class, 'head'],
+                //Method::HTTP_OPTIONS    => [LogEntry::class, 'options'],
+            ],
+            '/log-entries'  => [],
+        ];
+        $Router = new Router(new RoutingMapArray($routing_table));
         $RoutingMiddleware = new RoutingMiddleware($HttpServer, $Router);
 
         //custom middleware for the app
-        $ServingMiddleware = new ServingMiddleware($HttpServer, []);//this serves all requests
+        //$ServingMiddleware = new ServingMiddleware($HttpServer, []);//this serves all requests
+
+        $ExecutorMiddleware = new ExecutorMiddleware($HttpServer);
+
+        $middlewares[] = $RestMiddleware;
         $middlewares[] = $ApplicationMiddleware;
         $middlewares[] = $RewritingMiddleware;
         $middlewares[] = $RoutingMiddleware;
-        $middlewares[] = $ServingMiddleware;
+        //$middlewares[] = $ServingMiddleware;//this is a custom middleware
+        $middlewares[] = $ExecutorMiddleware;
 
         $DefaultResponseBody = new Stream();
         $DefaultResponseBody->write('Content not found or request not understood (routing not configured).');
