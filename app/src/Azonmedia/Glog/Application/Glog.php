@@ -2,21 +2,23 @@
 
 namespace Azonmedia\Glog\Application;
 
+
 use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Azonmedia\Glog\Storage\StorageProviderFile;
-use Azonmedia\Glog\Tasks\FinishHandler;
+//use Azonmedia\Glog\Tasks\FinishHandler;
 use Azonmedia\Glog\Tasks\TaskHandler;
 use Azonmedia\Routing\Router;
 use Azonmedia\Routing\RoutingMapArray;
 use Azonmedia\UrlRewriting\Rewriter;
 use Azonmedia\UrlRewriting\RewritingRulesArray;
 use Guzaba2\Application\Application;
-use Guzaba2\Base\Base;
+//use Guzaba2\Base\Base;
 use Guzaba2\Http\Body\Stream;
 use Guzaba2\Http\StatusCode;
 use Guzaba2\Kernel\Kernel;
 use Guzaba2\Http\RewritingMiddleware;
 use Guzaba2\Mvc\RoutingMiddleware;
+use Guzaba2\Swoole\ApplicationMiddleware;
 
 /**
  * Class Glog
@@ -46,7 +48,7 @@ class Glog extends Application
         parent::__construct();
 
         $this->app_directory = $app_directory;
-print_r(Application::$CONFIG_RUNTIME);
+
         Kernel::run($this);
     }
 
@@ -65,7 +67,10 @@ print_r(Application::$CONFIG_RUNTIME);
         //PresenterMiddleware
 
 
+
         $HttpServer = new \Guzaba2\Swoole\Server(self::$CONFIG_RUNTIME['swoole']['host'], self::$CONFIG_RUNTIME['swoole']['port'], self::$CONFIG_RUNTIME['swoole']);
+
+        $ApplicationMiddleware = new ApplicationMiddleware();//blocks static content
 
         $Rewriter = new Rewriter(new RewritingRulesArray([]));
         $RewritingMiddleware = new RewritingMiddleware($HttpServer, $Rewriter);
@@ -75,6 +80,7 @@ print_r(Application::$CONFIG_RUNTIME);
 
         //custom middleware for the app
         $ServingMiddleware = new ServingMiddleware($HttpServer, []);//this serves all requests
+        $middlewares[] = $ApplicationMiddleware;
         $middlewares[] = $RewritingMiddleware;
         $middlewares[] = $RoutingMiddleware;
         $middlewares[] = $ServingMiddleware;
