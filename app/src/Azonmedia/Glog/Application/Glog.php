@@ -15,6 +15,9 @@ use Azonmedia\UrlRewriting\Rewriter;
 use Azonmedia\UrlRewriting\RewritingRulesArray;
 use Guzaba2\Application\Application;
 //use Guzaba2\Base\Base;
+use Guzaba2\Database\ConnectionFactory;
+use Guzaba2\Database\ConnectionProviders\Pool;
+use Guzaba2\Database\ConnectionProviders\Basic;
 use Guzaba2\Http\Body\Stream;
 use Guzaba2\Http\Method;
 use Guzaba2\Http\StatusCode;
@@ -24,6 +27,12 @@ use Guzaba2\Mvc\ExecutorMiddleware;
 use Guzaba2\Mvc\RoutingMiddleware;
 use Guzaba2\Swoole\ApplicationMiddleware;
 use Guzaba2\Mvc\RestMiddleware;
+use Guzaba2\Swoole\WorkerHandler;
+
+class c1
+{
+    public $p1 = 'aaa';
+}
 
 /**
  * Class Glog
@@ -36,7 +45,7 @@ class Glog extends Application
         'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
             'host'              => '0.0.0.0',
             'port'              => 8081,
-            'worker_num'        => 4,//http workers
+            'worker_num'        => 1,//http workers
             'task_worker_num'   => 8,//tasks workers
         ],
     ];
@@ -70,6 +79,8 @@ class Glog extends Application
 //    $middlewares[] = new AuthorizationMiddleware();
 //    $middlewares[] = new ExecutorMiddleware();
         //PresenterMiddleware
+
+
 
 
 
@@ -116,11 +127,30 @@ class Glog extends Application
 
         $RequestHandler = new \Guzaba2\Swoole\RequestHandler($middlewares, $HttpServer, $DefaultResponse);
 
+        $WorkerHandler = new WorkerHandler($HttpServer);
+
         //https://github.com/swoole/swoole-docs/blob/master/get-started/examples/async_task.md
         $TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
 
         //$FinishHandler = new FinishHandler();
 
+
+
+        $conf = [
+            'max_connections'       => 10, //max for each type
+            'connections'           => [
+                MysqlConnection::class,
+            ]
+        ];
+        $Pool = new Pool();
+        $Pool->initialize($conf);
+        //$Pool = new Basic();
+        $ConnectionFactory = ConnectionFactory::get_instance();
+        $ConnectionFactory->set_connection_provider($Pool);
+
+
+
+        $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('request', $RequestHandler);
         $HttpServer->on('task', $TaskHandler);
         //$HttpServer->on('finish', $FinishHandler);
