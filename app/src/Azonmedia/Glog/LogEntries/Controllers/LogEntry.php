@@ -55,9 +55,9 @@ class LogEntry extends Controller
         //$Connection1 = $ConnectionFactory->get_connection(\Guzaba2\Database\Sql\Mysql\ConnectionCoroutine::class);
         $Connection1 = $ConnectionFactory->get_connection(MysqlConnection::class);
 
-        //$query = "SELECT * FROM some_table";
+        $query = "SELECT * FROM some_table";
         //\Co::sleep(3);
-        $query = "SELECT SLEEP(1)";
+        //$query = "SELECT SLEEP(1)";
         $Statement = $Connection1->prepare($query);
         $Statement->execute();
         $data = $Statement->fetchAll();

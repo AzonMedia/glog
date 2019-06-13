@@ -45,9 +45,16 @@ class Glog extends Application
         'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
             'host'              => '0.0.0.0',
             'port'              => 8081,
-            'worker_num'        => 1,//http workers
+            'worker_num'        => 6,//http workers
             'task_worker_num'   => 8,//tasks workers
         ],
+        'pool' => [
+            'max_connections'       => 12, //max for each type
+            //connections cant be initialized before the request serving is started (which is inside a coroutine)
+            //'connections'           => [
+            //    MysqlConnection::class,
+            //]
+        ]
     ];
 
     protected static $CONFIG_RUNTIME = [];
@@ -135,15 +142,8 @@ class Glog extends Application
         //$FinishHandler = new FinishHandler();
 
 
-
-        $conf = [
-            'max_connections'       => 10, //max for each type
-            'connections'           => [
-                MysqlConnection::class,
-            ]
-        ];
         $Pool = new Pool();
-        $Pool->initialize($conf);
+        $Pool->initialize(self::$CONFIG_RUNTIME['pool']);
         //$Pool = new Basic();
         $ConnectionFactory = ConnectionFactory::get_instance();
         $ConnectionFactory->set_connection_provider($Pool);

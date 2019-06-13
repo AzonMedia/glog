@@ -22,6 +22,6 @@ class MysqlConnection extends ConnectionCoroutine
     public function __construct()
     {
         parent::__construct(self::$CONFIG_RUNTIME);
-        print 'NEW CONNECTION'.PHP_EOL;
+        //print 'NEW CONNECTION'.PHP_EOL;
     }
 }
