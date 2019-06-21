@@ -18,6 +18,7 @@ use Guzaba2\Application\Application;
 use Guzaba2\Database\ConnectionFactory;
 use Guzaba2\Database\ConnectionProviders\Pool;
 use Guzaba2\Database\ConnectionProviders\Basic;
+use Guzaba2\Di\Container;
 use Guzaba2\Http\Body\Stream;
 use Guzaba2\Http\Method;
 use Guzaba2\Http\StatusCode;
@@ -80,6 +81,10 @@ class Glog extends Application
 
     public function execute() : int
     {
+
+        $DependencyContainer = new Container();
+        kernel::set_di_container($DependencyContainer);
+
         $middlewares = [];
 //    $middlewares[] = new RoutingMiddleware();
 //    $middlewares[] = new FilteringMiddleware();
@@ -142,11 +147,15 @@ class Glog extends Application
         //$FinishHandler = new FinishHandler();
 
 
-        $Pool = new Pool();
-        $Pool->initialize(self::$CONFIG_RUNTIME['pool']);
+        //$Pool = new Pool();
+        //$Pool->initialize(self::$CONFIG_RUNTIME['pool']);
         //$Pool = new Basic();
-        $ConnectionFactory = ConnectionFactory::get_instance();
-        $ConnectionFactory->set_connection_provider($Pool);
+        //$ConnectionFactory = ConnectionFactory::get_instance();
+        //$ConnectionFactory->set_connection_provider($Pool);
+        //$Pool = new Pool(self::$CONFIG_RUNTIME['pool']);
+        //$ConnectionFactory =
+
+        //$Services = new Services
 
 
 

@@ -2,10 +2,20 @@
 
 namespace Azonmedia\Glog\LogEntries\Models;
 
+use Azonmedia\Glog\Application\MysqlConnection;
 use Guzaba2\Base\Base;
+use Guzaba2\Database\ConnectionFactory;
 
 class LogEntry extends Base
 {
+
+    protected const CONFIG_DEFAULTS = [
+        'services'      => [
+            'ConnectionFactory'
+        ]
+    ];
+
+    protected static $CONFIG_RUNTIME = [];
 
     /**
      * @var string
@@ -39,5 +49,23 @@ class LogEntry extends Base
     public function get_accepted_microtime() : float
     {
         return $this->accepted_microtime;
+    }
+
+    public function test() : void
+    {
+        //$ConnectionFactory = ConnectionFactory::get_instance();
+        $ConnectionFactory = self::ConnectionFactory();
+        //$Connection1 = $ConnectionFactory->get_connection(\Guzaba2\Database\Sql\Mysql\ConnectionCoroutine::class);
+        $Connection1 = $ConnectionFactory->get_connection(MysqlConnection::class);
+
+        $query = "SELECT * FROM some_table";
+        //\Co::sleep(3);
+        //$query = "SELECT SLEEP(1)";
+        $Statement = $Connection1->prepare($query);
+        $Statement->execute();
+        $data = $Statement->fetchAll();
+        //print_r($data);
+
+        $ConnectionFactory->free_connection($Connection1);
     }
 }

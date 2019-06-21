@@ -51,19 +51,8 @@ class LogEntry extends Controller
         //print '==================='.PHP_EOL;
 
 
-        $ConnectionFactory = ConnectionFactory::get_instance();
-        //$Connection1 = $ConnectionFactory->get_connection(\Guzaba2\Database\Sql\Mysql\ConnectionCoroutine::class);
-        $Connection1 = $ConnectionFactory->get_connection(MysqlConnection::class);
-
-        $query = "SELECT * FROM some_table";
-        //\Co::sleep(3);
-        //$query = "SELECT SLEEP(1)";
-        $Statement = $Connection1->prepare($query);
-        $Statement->execute();
-        $data = $Statement->fetchAll();
-        //print_r($data);
-
-        $ConnectionFactory->free_connection($Connection1);
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry('');
+        $LogEntry->test();
 
 
         $Response = parent::get_stream_ok_response('ok');
