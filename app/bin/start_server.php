@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace Azonmedia\Glog;
 
+use Azonmedia\Di\Container;
 use Azonmedia\Glog\Application\Glog;
 use Azonmedia\Registry\Interfaces\RegistryBackendInterface;
 use Azonmedia\Registry\Registry;
 use Azonmedia\Registry\RegistryBackendEnv;
+use Guzaba2\Database\ConnectionFactory;
+use Guzaba2\Database\ConnectionProviders\Pool;
 use Guzaba2\Kernel\Kernel;
 use Guzaba2\Authorization\AuthorizationMiddleware;
 use Guzaba2\Authorization\FilteringMiddleware;
@@ -52,6 +55,19 @@ const APP_CONFIG = [
 
     $Logger = new Logger('main_logger');
     $Logger->pushHandler(new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt'));
+
+    $di_config = [
+        'ConnectionFactory'         => [
+            'class'                     => ConnectionFactory::class,
+            'args'                      => [],
+        ],
+        'ConnectionPool'            => [
+            'class'                     => Pool::class,
+            'args'                      => [],
+        ]
+    ];
+
+    //$DependencyContainer = new Container($di_config);
 
     Kernel::initialize($Registry, $Logger);
 

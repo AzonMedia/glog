@@ -27,7 +27,7 @@ implements MiddlewareInterface
      */
     protected $HttpServer;
 
-    public function __construct(array $options = [], Server $HttpServer)
+    public function __construct(Server $HttpServer, array $options = [])
     {
         parent::__construct();
 
@@ -51,6 +51,7 @@ implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $Request, RequestHandlerInterface $Handler) : ResponseInterface
     {
+
         //for testing
         //file_put_contents($this->options['log_dir'].'log.txt', time().' '.$Request->getBody()->read(8196).PHP_EOL, FILE_APPEND);//add the POST content
         $entry_content = $Request->getBody()->read(8196);
