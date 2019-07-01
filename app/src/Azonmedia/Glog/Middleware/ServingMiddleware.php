@@ -62,8 +62,46 @@ implements MiddlewareInterface
         $Body->write($json_output);
         $Response = new Response(StatusCode::HTTP_OK, ['Content-Type' => 'application/json'], $Body);
 
+        // Example for using UploadedFile
+        // $uploadedFiles = $Request->getUploadedFiles();
 
+        // if (!empty($uploadedFiles))  {
+
+        //     foreach ($uploadedFiles as $uploadedFile) {
+
+        //         if (is_array($uploadedFile)) {
+        //             foreach ($uploadedFile as $subUploadedFile) {
+        //                 $this->uploadFile($subUploadedFile, $Body);
+        //             }
+        //         } else {
+        //             $this->uploadFile($uploadedFile, $Body);
+        //         }
+        //     }
+        // }
+
+        // $Body->write('<form method="post" enctype="multipart/form-data">
+        //     Select multiple files: <input type="file" name="my_file1[]" multiple ><br />
+        //     Select One file: <input type="file" name="my_file2"><br />
+        //     <input type="submit" value="Submit">
+        //     </form>');
+        // $Response = new Response(StatusCode::HTTP_OK, ['Content-Type' => 'text/html'], $Body);
 
         return $Response;
     }
+
+    // Example for using UploadedFile
+    // private function uploadFile(\Guzaba2\Http\UploadedFile $fileToUpload, $Body){
+    //     $directory = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'uploads';
+
+    //     $extension = pathinfo($fileToUpload->getClientFilename(), PATHINFO_EXTENSION);
+    //     $basename = bin2hex(random_bytes(8)); // see http://php.net/manual/en/function.random-bytes.php
+    //     $filename = sprintf('%s.%0.8s', $basename, $extension);
+
+    //     try {
+    //         $fileToUpload->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
+    //         $Body->write('<h3>File ' . $fileToUpload->getClientFilename() . ' is uploaded in app/src/Azonmedia/Glog/uploads!</h3>');
+    //     } catch (\Exception $e) {
+    //         $Body->write('<h3>File ' . $fileToUpload->getClientFilename() . ' is NOT uploaded!</h3>');
+    //     }
+    // }
 }
