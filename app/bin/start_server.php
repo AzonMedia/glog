@@ -20,7 +20,8 @@ use Guzaba2\Registry\Interfaces\RegistryInterface;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-require_once('../../vendor/autoload.php');
+$autoload_path = realpath(__DIR__ . '/../../vendor/autoload.php');
+require_once($autoload_path);
 
 //https://github.com/swoole/swoole-docs/blob/master/get-started/examples/async_task.md
 //https://www.swoole.co.uk/docs/modules/swoole-server/configuration
@@ -56,18 +57,26 @@ const APP_CONFIG = [
     $Logger = new Logger('main_logger');
     $Logger->pushHandler(new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt'));
 
-    $di_config = [
-        'ConnectionFactory'         => [
-            'class'                     => ConnectionFactory::class,
-            'args'                      => [],
-        ],
-        'ConnectionPool'            => [
-            'class'                     => Pool::class,
-            'args'                      => [],
-        ]
-    ];
-
-    //$DependencyContainer = new Container($di_config);
+    // Example Dependency config
+//    $di_config = [
+//        'ConnectionFactory'         => [
+//            'class'                     => ConnectionFactory::class,
+//            'args'                      => [],
+//        ],
+//        'ConnectionPool'            => [
+//            'class'                     => Pool::class,
+//            'args'                      => [],
+//        ]
+//        SampleClass::class => [
+//            'class' => SampleClass::class,
+//            'args' => [
+//                'sampleString' => 'string',
+//                'sampleInt' => 17
+//            ]
+//        ],
+//    ];
+//    $DependencyContainer = new Container($di_config);
+//    $DependencyContainer->get(SampleClass::class);
 
     Kernel::initialize($Registry, $Logger);
 

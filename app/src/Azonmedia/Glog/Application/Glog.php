@@ -98,6 +98,9 @@ class Glog extends Application
 
         $HttpServer = new \Guzaba2\Swoole\Server(self::$CONFIG_RUNTIME['swoole']['host'], self::$CONFIG_RUNTIME['swoole']['port'], self::$CONFIG_RUNTIME['swoole']);
 
+        // TODO disable coroutine for debugging
+        // $HttpServer->set(['enable_coroutine' => false,]);
+
         $ApplicationMiddleware = new ApplicationMiddleware();//blocks static content
         $RestMiddleware = new RestMiddleware();
 

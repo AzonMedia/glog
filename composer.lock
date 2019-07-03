@@ -1,0 +1,966 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "5ea211cb7bc00b85733964ed4378765a",
+    "packages": [
+        {
+            "name": "azonmedia/debug",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/debug.git",
+                "reference": "48f6132600cf915fc9a724e41e29610801385a11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/debug/zipball/48f6132600cf915fc9a724e41e29610801385a11",
+                "reference": "48f6132600cf915fc9a724e41e29610801385a11",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Azonmedia\\Debug\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Debug utilities",
+            "homepage": "https://github.com/AzonMedia/debug",
+            "keywords": [
+                "debug",
+                "utility"
+            ],
+            "time": "2019-05-28T12:44:33+00:00"
+        },
+        {
+            "name": "azonmedia/di",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/di.git",
+                "reference": "5f12d3ad2fecf31c3cf87c5baa23fa679f69d22a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/di/zipball/5f12d3ad2fecf31c3cf87c5baa23fa679f69d22a",
+                "reference": "5f12d3ad2fecf31c3cf87c5baa23fa679f69d22a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0",
+                "psr/container": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Azonmedia\\Di\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Dependency injection container",
+            "homepage": "https://github.com/AzonMedia/di",
+            "keywords": [
+                "container",
+                "dependency injection",
+                "di"
+            ],
+            "time": "2019-06-21T15:43:53+00:00"
+        },
+        {
+            "name": "azonmedia/guzaba2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/guzaba2.git",
+                "reference": "ca97d42e2149762f680d54608a51b2ba7ba37c81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/guzaba2/zipball/ca97d42e2149762f680d54608a51b2ba7ba37c81",
+                "reference": "ca97d42e2149762f680d54608a51b2ba7ba37c81",
+                "shasum": ""
+            },
+            "require": {
+                "azonmedia/debug": "dev-master",
+                "azonmedia/di": "dev-master",
+                "azonmedia/psr-to-swoole": "dev-master",
+                "azonmedia/reflection": "dev-master",
+                "azonmedia/registry": "dev-master",
+                "azonmedia/routing": "dev-master",
+                "azonmedia/swoole-to-psr": "dev-master",
+                "azonmedia/url-rewriting": "dev-master",
+                "eaglewu/swoole-ide-helper": "dev-master",
+                "jbzoo/utils": "^2.3",
+                "php": ">=7.2.0",
+                "psr/http-message": "^1.0",
+                "psr/http-server-middleware": "^1.0",
+                "psr/log": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Guzaba2/Kernel/Kernel.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Framework for swoole",
+            "homepage": "https://github.com/AzonMedia/guzaba2",
+            "keywords": [
+                "framework",
+                "swoole"
+            ],
+            "time": "2019-07-01T11:53:00+00:00"
+        },
+        {
+            "name": "azonmedia/psr-to-swoole",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/psr-to-swoole.git",
+                "reference": "1f183ee871e0b124c4c1ecd24d26bcfe68183bc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/psr-to-swoole/zipball/1f183ee871e0b124c4c1ecd24d26bcfe68183bc9",
+                "reference": "1f183ee871e0b124c4c1ecd24d26bcfe68183bc9",
+                "shasum": ""
+            },
+            "require": {
+                "eaglewu/swoole-ide-helper": "dev-master",
+                "php": ">=7.2.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Azonmedia\\PsrToSwoole\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Utilities to convert between Swoole and PSR request and response",
+            "homepage": "https://github.com/AzonMedia/psr-to-swoole",
+            "keywords": [
+                "psr",
+                "swoole",
+                "utility"
+            ],
+            "time": "2019-06-20T11:29:07+00:00"
+        },
+        {
+            "name": "azonmedia/reflection",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/reflection.git",
+                "reference": "84e2ba34ef3e0449726144aa29d9702864c542d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/reflection/zipball/84e2ba34ef3e0449726144aa29d9702864c542d9",
+                "reference": "84e2ba34ef3e0449726144aa29d9702864c542d9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Azonmedia\\Reflection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Classes extending various PHP/Reflection classes",
+            "homepage": "https://github.com/AzonMedia/reflection",
+            "keywords": [
+                "reflection",
+                "utility"
+            ],
+            "time": "2019-05-21T08:42:09+00:00"
+        },
+        {
+            "name": "azonmedia/registry",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/registry.git",
+                "reference": "7511612c62414a5ba76774ad1ae735732697cf3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/registry/zipball/7511612c62414a5ba76774ad1ae735732697cf3c",
+                "reference": "7511612c62414a5ba76774ad1ae735732697cf3c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Azonmedia\\Registry\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library for loading and providing configuration settings",
+            "homepage": "https://github.com/AzonMedia/reflection",
+            "keywords": [
+                "registry",
+                "utility"
+            ],
+            "time": "2019-06-24T08:29:28+00:00"
+        },
+        {
+            "name": "azonmedia/routing",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/routing.git",
+                "reference": "ee3bca53369bfbf565551ef695ec292ff061ff72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/routing/zipball/ee3bca53369bfbf565551ef695ec292ff061ff72",
+                "reference": "ee3bca53369bfbf565551ef695ec292ff061ff72",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Azonmedia\\Routing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Routing library",
+            "homepage": "https://github.com/AzonMedia/routing",
+            "keywords": [
+                "routing",
+                "utility"
+            ],
+            "time": "2019-05-29T11:39:25+00:00"
+        },
+        {
+            "name": "azonmedia/swoole-to-psr",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/swoole-to-psr.git",
+                "reference": "4f650c76b28129ca6a3c6e49dcfbbd7361135aac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/swoole-to-psr/zipball/4f650c76b28129ca6a3c6e49dcfbbd7361135aac",
+                "reference": "4f650c76b28129ca6a3c6e49dcfbbd7361135aac",
+                "shasum": ""
+            },
+            "require": {
+                "azonmedia/guzaba2": "dev-master",
+                "php": ">=7.2.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "azonmedia/psr-to-swoole": "dev-master",
+                "eaglewu/swoole-ide-helper": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Azonmedia\\SwooleToPsr\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Utilities to convert between Swoole and PSR request and response",
+            "homepage": "https://github.com/AzonMedia/swoole-to-psr",
+            "keywords": [
+                "psr",
+                "swoole",
+                "utility"
+            ],
+            "time": "2019-07-01T11:54:08+00:00"
+        },
+        {
+            "name": "azonmedia/url-rewriting",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzonMedia/url-rewriting.git",
+                "reference": "d60021ff618d3a36dc30a096075e4ddd7d1833f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzonMedia/url-rewriting/zipball/d60021ff618d3a36dc30a096075e4ddd7d1833f7",
+                "reference": "d60021ff618d3a36dc30a096075e4ddd7d1833f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Azonmedia\\UrlRewriting\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vesko Kenashkov",
+                    "email": "kenashkov@azonmedia.com",
+                    "homepage": "http://azonmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "URL rewriting library",
+            "homepage": "https://github.com/AzonMedia/url0rewriting",
+            "keywords": [
+                "URL rewriting",
+                "utility"
+            ],
+            "time": "2019-05-27T12:24:13+00:00"
+        },
+        {
+            "name": "eaglewu/swoole-ide-helper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wudi/swoole-ide-helper.git",
+                "reference": "ac02b69535e28e3398df151b7e8e9a61370f752e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wudi/swoole-ide-helper/zipball/ac02b69535e28e3398df151b7e8e9a61370f752e",
+                "reference": "ac02b69535e28e3398df151b7e8e9a61370f752e",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "eagle",
+                    "email": "eaglewudi@gmail.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "Swoole IDE Helper, to improve auto-completion",
+            "keywords": [
+                "autocomplete",
+                "codeintel",
+                "helper",
+                "ide",
+                "netbeans",
+                "phpdoc",
+                "phpstorm",
+                "sublime",
+                "swoole"
+            ],
+            "time": "2019-05-24T09:02:25+00:00"
+        },
+        {
+            "name": "jbzoo/data",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JBZoo/Data.git",
+                "reference": "1e1238e915b942b4147ea8746760423f3cbdf20b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JBZoo/Data/zipball/1e1238e915b942b4147ea8746760423f3cbdf20b",
+                "reference": "1e1238e915b942b4147ea8746760423f3cbdf20b",
+                "shasum": ""
+            },
+            "require": {
+                "jbzoo/utils": "^2.2.1",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "jbzoo/phpunit": "^2.2.1",
+                "jbzoo/profiler": "^1.0.5",
+                "satooshi/php-coveralls": "^1.0.2",
+                "symfony/yaml": "^3.3.13"
+            },
+            "suggest": {
+                "symfony/yaml": "^3.3.13"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "JBZoo\\Data\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SmetDenis",
+                    "email": "denis@jbzoo.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "Extended implementation of ArrayObject",
+            "keywords": [
+                "array",
+                "arrayobject",
+                "config",
+                "data",
+                "ini",
+                "json",
+                "params",
+                "yml"
+            ],
+            "time": "2018-12-03T16:32:55+00:00"
+        },
+        {
+            "name": "jbzoo/utils",
+            "version": "2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JBZoo/Utils.git",
+                "reference": "63de09eedaf8fa606003236553078fcf5ca8d48d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JBZoo/Utils/zipball/63de09eedaf8fa606003236553078fcf5ca8d48d",
+                "reference": "63de09eedaf8fa606003236553078fcf5ca8d48d",
+                "shasum": ""
+            },
+            "require": {
+                "jbzoo/data": "^1.6|^2.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "jbzoo/phpunit": "^2.2",
+                "jbzoo/profiler": "^1.0",
+                "php-coveralls/php-coveralls": "^2.1",
+                "symfony/polyfill-mbstring": "^1.10",
+                "symfony/process": "^3.3|^4.1"
+            },
+            "suggest": {
+                "ext-mbstring": "Provides multibyte specific string functions",
+                "symfony/polyfill-mbstring": "For UTF-8 if ext-mbstring disabled",
+                "symfony/process": "For Cli::exec() method only"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/defines.php"
+                ],
+                "psr-4": {
+                    "JBZoo\\Utils\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brandon Wamboldt",
+                    "email": "brandon.wamboldt@gmail.com"
+                },
+                {
+                    "name": "SmetDenis",
+                    "email": "denis@jbzoo.com",
+                    "role": "lead"
+                },
+                {
+                    "name": "Luís Nóbrega",
+                    "email": "luis.barros.nobrega@gmail.com"
+                }
+            ],
+            "description": "A collection of useful PHP functions, mini classes and snippets that you need every day.",
+            "keywords": [
+                "array",
+                "cli",
+                "collection",
+                "command line",
+                "dates",
+                "email",
+                "env",
+                "environment",
+                "filesystem",
+                "filter",
+                "helper",
+                "helpers",
+                "http",
+                "image",
+                "mbstring",
+                "misc",
+                "serialize",
+                "slugify",
+                "string",
+                "timer",
+                "url",
+                "utility",
+                "utils"
+            ],
+            "time": "2019-06-26T11:19:29+00:00"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "69c7f034ffa9459cfa7935922a4c233123d63de2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/69c7f034ffa9459cfa7935922a4c233123d63de2",
+                "reference": "69c7f034ffa9459cfa7935922a4c233123d63de2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2",
+                "psr/log": "^1.0.1"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
+                "doctrine/couchdb": "~1.0@dev",
+                "elasticsearch/elasticsearch": "^6.0",
+                "graylog2/gelf-php": "^1.4.2",
+                "jakub-onderka/php-parallel-lint": "^0.9",
+                "php-amqplib/php-amqplib": "~2.4",
+                "php-console/php-console": "^3.1.3",
+                "phpspec/prophecy": "^1.6.1",
+                "phpunit/phpunit": "^7.5",
+                "predis/predis": "^1.1",
+                "rollbar/rollbar": "^1.3",
+                "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^1.9",
+                "swiftmailer/swiftmailer": "^5.3|^6.0"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "elasticsearch/elasticsearch": "Allow sending log messages to an Elasticsearch server via official client",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongodb": "Allow sending log messages to a MongoDB server (via driver)",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+                "php-console/php-console": "Allow sending log messages to Google Chrome",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2019-07-02T14:19:13+00:00"
+        },
+        {
+            "name": "psr/container",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "014d250daebff39eba15ba990eeb2a140798e77c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/014d250daebff39eba15ba990eeb2a140798e77c",
+                "reference": "014d250daebff39eba15ba990eeb2a140798e77c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Container\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https://github.com/php-fig/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "time": "2018-12-29T15:36:03+00:00"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2016-08-06T14:39:51+00:00"
+        },
+        {
+            "name": "psr/http-server-handler",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-server-handler.git",
+                "reference": "f981eec4f9870ace3ee8ada18c88a59461080cba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-server-handler/zipball/f981eec4f9870ace3ee8ada18c88a59461080cba",
+                "reference": "f981eec4f9870ace3ee8ada18c88a59461080cba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Server\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP server-side request handler",
+            "keywords": [
+                "handler",
+                "http",
+                "http-interop",
+                "psr",
+                "psr-15",
+                "psr-7",
+                "request",
+                "response",
+                "server"
+            ],
+            "time": "2019-06-07T16:00:12+00:00"
+        },
+        {
+            "name": "psr/http-server-middleware",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-server-middleware.git",
+                "reference": "780c6808074df604f30fc72bb6aaa889f1ff10e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-server-middleware/zipball/780c6808074df604f30fc72bb6aaa889f1ff10e9",
+                "reference": "780c6808074df604f30fc72bb6aaa889f1ff10e9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "psr/http-message": "^1.0",
+                "psr/http-server-handler": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Server\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP server-side middleware",
+            "keywords": [
+                "http",
+                "http-interop",
+                "middleware",
+                "psr",
+                "psr-15",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2019-05-23T18:10:42+00:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "c4421fcac1edd5a324fda73e589a5cf96e52ffd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/c4421fcac1edd5a324fda73e589a5cf96e52ffd0",
+                "reference": "c4421fcac1edd5a324fda73e589a5cf96e52ffd0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2018-11-21T13:42:00+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "azonmedia/guzaba2": 20,
+        "monolog/monolog": 20,
+        "azonmedia/di": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
