@@ -5,8 +5,9 @@ namespace Azonmedia\Glog\LogEntries\Models;
 use Azonmedia\Glog\Application\MysqlConnection;
 use Guzaba2\Base\Base;
 use Guzaba2\Database\ConnectionFactory;
+use Guzaba2\Orm\ActiveRecord;
 
-class LogEntry extends Base
+class LogEntry extends ActiveRecord
 {
 
     protected const CONFIG_DEFAULTS = [
@@ -20,20 +21,23 @@ class LogEntry extends Base
     /**
      * @var string
      */
-    protected $entry_data;
+    //protected $entry_data;
 
     /**
      * When the log entry was accepted for logging (which is different from when the actual event occurred which is provided in the json_data)
      * @var int
      */
-    protected $accepted_microtime;
+    //protected $accepted_microtime;
 
-    public function __construct(string $json_data)
+    //public function __construct(string $json_data)
+    public function __construct(int $index)
     {
-        $entry_data = json_decode($json_data);
-        //$this->entry_data = $entry_data ?? ['message' => 'parsing json failed'];
-        $this->entry_data = $entry_data ?? ['message' => $json_data];//if the decoding failed just put as message the provided string
-        $this->accepted_microtime = microtime(TRUE);
+        parent::__construct($index);
+
+//        $entry_data = json_decode($json_data);
+//        //$this->entry_data = $entry_data ?? ['message' => 'parsing json failed'];
+//        $this->entry_data = $entry_data ?? ['message' => $json_data];//if the decoding failed just put as message the provided string
+//        $this->accepted_microtime = microtime(TRUE);
     }
 
     public function __toString() : string
@@ -54,9 +58,8 @@ class LogEntry extends Base
     public function test() : void
     {
         //$ConnectionFactory = ConnectionFactory::get_instance();
-        $ConnectionFactory = self::ConnectionFactory();
         //$Connection1 = $ConnectionFactory->get_connection(\Guzaba2\Database\Sql\Mysql\ConnectionCoroutine::class);
-        $Connection1 = $ConnectionFactory->get_connection(MysqlConnection::class);
+        $Connection1 = self::ConnectionFactory()->get_connection(MysqlConnection::class);
 
         $query = "SELECT * FROM some_table";
         //\Co::sleep(3);
@@ -66,6 +69,7 @@ class LogEntry extends Base
         $data = $Statement->fetchAll();
         //print_r($data);
 
-        $ConnectionFactory->free_connection($Connection1);
+        //$ConnectionFactory->free_connection($Connection1);
+        self::ConnectionFactory()->free_connection($Connection1);
     }
 }

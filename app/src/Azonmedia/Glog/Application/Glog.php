@@ -46,8 +46,10 @@ class Glog extends Application
         'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
             'host'              => '0.0.0.0',
             'port'              => 8081,
-            'worker_num'        => 6,//http workers
-            'task_worker_num'   => 8,//tasks workers
+            'worker_num'        => 4,//http workers
+            //Swoole\Coroutine::create(): Unable to use async-io in task processes, please set `task_enable_coroutine` to true.
+            //'task_worker_num'   => 8,//tasks workers
+            'task_worker_num'   => 0,//tasks workers
         ],
         'pool' => [
             'max_connections'       => 12, //max for each type
@@ -81,6 +83,7 @@ class Glog extends Application
 
     public function execute() : int
     {
+
 
         $DependencyContainer = new Container();
         kernel::set_di_container($DependencyContainer);
@@ -160,10 +163,9 @@ class Glog extends Application
 
         //$Services = new Services
 
-
-
         $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('request', $RequestHandler);
+
         $HttpServer->on('task', $TaskHandler);
         //$HttpServer->on('finish', $FinishHandler);
         $HttpServer->start();

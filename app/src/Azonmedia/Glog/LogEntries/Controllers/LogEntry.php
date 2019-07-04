@@ -3,6 +3,7 @@
 namespace Azonmedia\Glog\LogEntries\Controllers;
 
 use Azonmedia\Glog\Application\MysqlConnection;
+use Guzaba2\Coroutine\Coroutine;
 use Guzaba2\Database\ConnectionFactory;
 use Guzaba2\Database\ConnectionProviders\Basic;
 use Guzaba2\Database\ConnectionProviders\Pool;
@@ -50,12 +51,29 @@ class LogEntry extends Controller
         */
         //print '==================='.PHP_EOL;
 
+        /*
+        //$LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry('');
+        //$LogEntry->test();
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+        //print $LogEntry->get_object_internal_id().PHP_EOL;
+        $LogEntry->data['log_entry_data'] = 'fffffff';
+        $LogEntry->is_new_flag = TRUE;
 
-        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry('');
-        $LogEntry->test();
+        Coroutine::create(function(){
+            $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+            print $LogEntry->get_object_internal_id().PHP_EOL;
+        });
 
+        Coroutine::create(function(){
+            $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+            print $LogEntry->get_object_internal_id().PHP_EOL;
+        });
 
-        $Response = parent::get_stream_ok_response('ok');
+        */
+
+        $data = 'ok';
+        //$data = 'cnt coroutines: '.count(Coroutine::$coroutines_ids);
+        $Response = parent::get_stream_ok_response($data);
         return $Response;
     }
 

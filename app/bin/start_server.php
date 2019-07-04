@@ -43,6 +43,10 @@ const APP_CONFIG = [
 
 (function(){
 
+    //ini_set("swoole.enable_preemptive_scheduler","1");
+    //\Swoole\Coroutine::set([ 'enable_preemptive_scheduler' => 1 ]);
+    //the above is available in Master branch only not released yet
+
     $initial_directory = getcwd();
     $app_directory = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 
