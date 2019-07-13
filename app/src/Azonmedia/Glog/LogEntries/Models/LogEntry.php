@@ -4,6 +4,7 @@ namespace Azonmedia\Glog\LogEntries\Models;
 
 use Azonmedia\Glog\Application\MysqlConnection;
 use Guzaba2\Base\Base;
+use Guzaba2\Coroutine\Coroutine;
 use Guzaba2\Database\ConnectionFactory;
 use Guzaba2\Orm\ActiveRecord;
 
@@ -16,7 +17,7 @@ class LogEntry extends ActiveRecord
         ]
     ];
 
-    protected static $CONFIG_RUNTIME = [];
+    protected const CONFIG_RUNTIME = [];
 
     /**
      * @var string
@@ -32,7 +33,11 @@ class LogEntry extends ActiveRecord
     //public function __construct(string $json_data)
     public function __construct(int $index)
     {
+
         parent::__construct($index);
+
+        //print_r(self::CONFIG_RUNTIME);
+        //print_r(get_declared_classes());
 
 //        $entry_data = json_decode($json_data);
 //        //$this->entry_data = $entry_data ?? ['message' => 'parsing json failed'];
@@ -60,6 +65,7 @@ class LogEntry extends ActiveRecord
         //$ConnectionFactory = ConnectionFactory::get_instance();
         //$Connection1 = $ConnectionFactory->get_connection(\Guzaba2\Database\Sql\Mysql\ConnectionCoroutine::class);
         $Connection1 = self::ConnectionFactory()->get_connection(MysqlConnection::class);
+        //print_r(Coroutine::getContext()->getConnections());
 
         $query = "SELECT * FROM some_table";
         //\Co::sleep(3);
@@ -69,7 +75,11 @@ class LogEntry extends ActiveRecord
         $data = $Statement->fetchAll();
         //print_r($data);
 
+        //print_r(self::CONFIG_RUNTIME);
+
         //$ConnectionFactory->free_connection($Connection1);
-        self::ConnectionFactory()->free_connection($Connection1);
+        //self::ConnectionFactory()->free_connection($Connection1);
+        //$Connection1->free();//even if not explicitly freed up the coroutine will free it at the end of its execution
+
     }
 }

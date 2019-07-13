@@ -4,11 +4,8 @@
 namespace Azonmedia\Glog\Application;
 
 
-use Guzaba2\Database\Sql\Mysql\ConnectionCoroutine;
-
-class MysqlConnection extends ConnectionCoroutine
+class MysqlTest extends MysqlConnection
 {
-
     protected const CONFIG_DEFAULTS = [
         'host'      => '192.168.0.92',
         'port'      => 3306,
@@ -17,14 +14,12 @@ class MysqlConnection extends ConnectionCoroutine
         'database'  => 'guzaba2',
     ];
 
-    //protected static $CONFIG_RUNTIME = [];
     protected const CONFIG_RUNTIME = [];
 
     public function __construct()
     {
+
         parent::__construct();
 
-        //parent::__construct(self::$CONFIG_RUNTIME);
-        //print 'NEW CONNECTION'.PHP_EOL;
     }
 }

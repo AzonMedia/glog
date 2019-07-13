@@ -30,11 +30,6 @@ use Guzaba2\Swoole\ApplicationMiddleware;
 use Guzaba2\Mvc\RestMiddleware;
 use Guzaba2\Swoole\WorkerHandler;
 
-class c1
-{
-    public $p1 = 'aaa';
-}
-
 /**
  * Class Glog
  * This is a configuration file. Has no methods and can not be instantiated
@@ -51,16 +46,10 @@ class Glog extends Application
             //'task_worker_num'   => 8,//tasks workers
             'task_worker_num'   => 0,//tasks workers
         ],
-        'pool' => [
-            'max_connections'       => 12, //max for each type
-            //connections cant be initialized before the request serving is started (which is inside a coroutine)
-            //'connections'           => [
-            //    MysqlConnection::class,
-            //]
-        ]
     ];
 
-    protected static $CONFIG_RUNTIME = [];
+    //protected static $CONFIG_RUNTIME = [];
+    protected const CONFIG_RUNTIME = [];
 
     /**
      * @var string
@@ -98,8 +87,7 @@ class Glog extends Application
 
 
 
-
-        $HttpServer = new \Guzaba2\Swoole\Server(self::$CONFIG_RUNTIME['swoole']['host'], self::$CONFIG_RUNTIME['swoole']['port'], self::$CONFIG_RUNTIME['swoole']);
+        $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole']);
 
         // TODO disable coroutine for debugging
         // $HttpServer->set(['enable_coroutine' => false,]);
@@ -141,6 +129,8 @@ class Glog extends Application
 
         $DefaultResponseBody = new Stream();
         $DefaultResponseBody->write('Content not found or request not understood (routing not configured).');
+        //$DefaultResponseBody = new \Guzaba2\Http\Body\Str();
+        //$DefaultResponseBody->write('Content not found or request not understood (routing not configured).');
         $DefaultResponse = new \Guzaba2\Http\Response(StatusCode::HTTP_NOT_FOUND, [], $DefaultResponseBody);
 
         $RequestHandler = new \Guzaba2\Swoole\RequestHandler($middlewares, $HttpServer, $DefaultResponse);
@@ -154,20 +144,30 @@ class Glog extends Application
 
 
         //$Pool = new Pool();
-        //$Pool->initialize(self::$CONFIG_RUNTIME['pool']);
+        //$Pool->initialize(self::CONFIG_RUNTIME['pool']);
         //$Pool = new Basic();
         //$ConnectionFactory = ConnectionFactory::get_instance();
         //$ConnectionFactory->set_connection_provider($Pool);
-        //$Pool = new Pool(self::$CONFIG_RUNTIME['pool']);
+        //$Pool = new Pool(self::CONFIG_RUNTIME['pool']);
         //$ConnectionFactory =
 
         //$Services = new Services
+
+
 
         $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('request', $RequestHandler);
 
         $HttpServer->on('task', $TaskHandler);
         //$HttpServer->on('finish', $FinishHandler);
+
+//        $table = new \Swoole\Table(100);
+//        $table->column('id', \Swoole\Table::TYPE_INT);
+//        $table->column('data', \Swoole\Table::TYPE_STRING, 128);
+//        $table->create();
+
+        //$HttpServer->table = $table;
+
         $HttpServer->start();
 
         return Kernel::EXIT_SUCCESS;

@@ -3,6 +3,7 @@
 namespace Azonmedia\Glog\LogEntries\Controllers;
 
 use Azonmedia\Glog\Application\MysqlConnection;
+use Azonmedia\Glog\Application\MysqlTest;
 use Guzaba2\Coroutine\Coroutine;
 use Guzaba2\Database\ConnectionFactory;
 use Guzaba2\Database\ConnectionProviders\Basic;
@@ -71,9 +72,16 @@ class LogEntry extends Controller
 
         */
 
+        //$o = new MysqlTest();
+
+
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+        $LogEntry->test();
+
         $data = 'ok';
         //$data = 'cnt coroutines: '.count(Coroutine::$coroutines_ids);
         $Response = parent::get_stream_ok_response($data);
+        //$Response = parent::get_string_ok_response($data);
         return $Response;
     }
 
