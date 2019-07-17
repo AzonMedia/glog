@@ -14,7 +14,8 @@ class LogEntry extends ActiveRecord
     protected const CONFIG_DEFAULTS = [
         'services'      => [
             'ConnectionFactory'
-        ]
+        ],
+        'main_table'    => 'log_entries',
     ];
 
     protected const CONFIG_RUNTIME = [];
@@ -33,7 +34,6 @@ class LogEntry extends ActiveRecord
     //public function __construct(string $json_data)
     public function __construct(int $index)
     {
-
         parent::__construct($index);
 
         //print_r(self::CONFIG_RUNTIME);

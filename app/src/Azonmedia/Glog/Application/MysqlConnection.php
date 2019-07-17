@@ -15,6 +15,7 @@ class MysqlConnection extends ConnectionCoroutine
         'user'      => 'vesko',
         'password'  => 'impas560',
         'database'  => 'guzaba2',
+        'tprefix'   => 'guzaba_',
     ];
 
     //protected static $CONFIG_RUNTIME = [];

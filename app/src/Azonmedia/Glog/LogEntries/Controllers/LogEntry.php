@@ -76,7 +76,7 @@ class LogEntry extends Controller
 
 
         $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
-        $LogEntry->test();
+        //$LogEntry->test();
 
         $data = 'ok';
         //$data = 'cnt coroutines: '.count(Coroutine::$coroutines_ids);
