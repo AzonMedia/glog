@@ -5,7 +5,7 @@ namespace Azonmedia\Glog\Application;
 
 use Azonmedia\Glog\Home\Controllers\Home;
 use Azonmedia\Glog\LogEntries\Controllers\LogEntry;
-use Azonmedia\Glog\Middleware\ServingMiddleware;
+//use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Azonmedia\Glog\Storage\StorageProviderFile;
 //use Azonmedia\Glog\Tasks\FinishHandler;
 use Azonmedia\Glog\Tasks\TaskHandler;
@@ -15,9 +15,9 @@ use Azonmedia\UrlRewriting\Rewriter;
 use Azonmedia\UrlRewriting\RewritingRulesArray;
 use Guzaba2\Application\Application;
 //use Guzaba2\Base\Base;
-use Guzaba2\Database\ConnectionFactory;
-use Guzaba2\Database\ConnectionProviders\Pool;
-use Guzaba2\Database\ConnectionProviders\Basic;
+//use Guzaba2\Database\ConnectionFactory;
+//use Guzaba2\Database\ConnectionProviders\Pool;
+//use Guzaba2\Database\ConnectionProviders\Basic;
 use Guzaba2\Di\Container;
 use Guzaba2\Http\Body\Stream;
 use Guzaba2\Http\Method;
@@ -28,7 +28,8 @@ use Guzaba2\Mvc\ExecutorMiddleware;
 use Guzaba2\Mvc\RoutingMiddleware;
 use Guzaba2\Swoole\ApplicationMiddleware;
 use Guzaba2\Mvc\RestMiddleware;
-use Guzaba2\Swoole\WorkerHandler;
+//use Guzaba2\Swoole\WorkerHandler;
+use Guzaba2\Swoole\Handlers\WorkerStart;
 
 /**
  * Class Glog
@@ -89,7 +90,7 @@ class Glog extends Application
 
         $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole']);
 
-        // TODO disable coroutine for debugging
+        // disable coroutine for debugging
         // $HttpServer->set(['enable_coroutine' => false,]);
 
         $ApplicationMiddleware = new ApplicationMiddleware();//blocks static content
@@ -133,12 +134,15 @@ class Glog extends Application
         //$DefaultResponseBody->write('Content not found or request not understood (routing not configured).');
         $DefaultResponse = new \Guzaba2\Http\Response(StatusCode::HTTP_NOT_FOUND, [], $DefaultResponseBody);
 
-        $RequestHandler = new \Guzaba2\Swoole\RequestHandler($middlewares, $HttpServer, $DefaultResponse);
+        //$RequestHandler = new \Guzaba2\Swoole\RequestHandler($middlewares, $HttpServer, $DefaultResponse);
+        $RequestHandler = new \Guzaba2\Swoole\Handlers\Http\Request($HttpServer, $middlewares, $DefaultResponse);
 
-        $WorkerHandler = new WorkerHandler($HttpServer);
+        //$WorkerHandler = new WorkerHandler($HttpServer);
+        $WorkerHandler = new WorkerStart($HttpServer);
 
         //https://github.com/swoole/swoole-docs/blob/master/get-started/examples/async_task.md
-        $TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
+        //$TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
+        //$TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
 
         //$FinishHandler = new FinishHandler();
 
@@ -156,9 +160,9 @@ class Glog extends Application
 
 
         $HttpServer->on('WorkerStart', $WorkerHandler);
-        $HttpServer->on('request', $RequestHandler);
+        $HttpServer->on('Request', $RequestHandler);
 
-        $HttpServer->on('task', $TaskHandler);
+        //$HttpServer->on('Task', $TaskHandler);
         //$HttpServer->on('finish', $FinishHandler);
 
 //        $table = new \Swoole\Table(100);

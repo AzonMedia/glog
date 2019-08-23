@@ -75,8 +75,19 @@ class LogEntry extends Controller
         //$o = new MysqlTest();
 
 
-        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
-        //$LogEntry->test();
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
+        $LogEntry->test();
+
+        /*
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
+        $LogEntry->log_entry_content = 'asd';
+        //$LogEntry->save();
+
+        $LogEntry2 = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
+        $LogEntry2->log_entry_content = 'gggg';
+        print $LogEntry->log_entry_content;
+        */
+
 
         $data = 'ok';
         //$data = 'cnt coroutines: '.count(Coroutine::$coroutines_ids);

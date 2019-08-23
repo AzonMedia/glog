@@ -52,8 +52,6 @@ const APP_CONFIG = [
 
     chdir($app_directory);
 
-    //Kernel::initialize(new Registry('AZONMEDIA_GLOG_'), (new Logger('kernellog') )->pushHandler(new StreamHandler('')) );
-
     $RegistryBackend = new RegistryBackendEnv('');
     $Registry = new Registry($RegistryBackend);
 
@@ -61,26 +59,6 @@ const APP_CONFIG = [
     $Logger = new Logger('main_logger');
     $Logger->pushHandler(new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt'));
 
-    // Example Dependency config
-//    $di_config = [
-//        'ConnectionFactory'         => [
-//            'class'                     => ConnectionFactory::class,
-//            'args'                      => [],
-//        ],
-//        'ConnectionPool'            => [
-//            'class'                     => Pool::class,
-//            'args'                      => [],
-//        ]
-//        SampleClass::class => [
-//            'class' => SampleClass::class,
-//            'args' => [
-//                'sampleString' => 'string',
-//                'sampleInt' => 17
-//            ]
-//        ],
-//    ];
-//    $DependencyContainer = new Container($di_config);
-//    $DependencyContainer->get(SampleClass::class);
 
     Kernel::initialize($Registry, $Logger);
 
