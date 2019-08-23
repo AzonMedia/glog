@@ -49,7 +49,6 @@ class Glog extends Application
         ],
     ];
 
-    //protected static $CONFIG_RUNTIME = [];
     protected const CONFIG_RUNTIME = [];
 
     /**

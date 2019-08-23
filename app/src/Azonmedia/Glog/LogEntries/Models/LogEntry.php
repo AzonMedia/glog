@@ -64,6 +64,11 @@ class LogEntry extends ActiveRecord
     public function test() : void
     {
 
+//        $DebuggerBackend = new \Guzaba2\Swoole\Debug\Backends\Basic();
+//        $Debugger = new \Azonmedia\Debug\Debugger($DebuggerBackend);
+//        //$this->SwooleDebugger = new \Guzaba2\Swoole\Debug\Debugger($this->HttpServer, $worker_id, $Debugger);
+//        $this->SwooleDebugger = new \Guzaba2\Swoole\Debug\Debugger(NULL, 0, $Debugger);
+
 //        //$ConnectionFactory = ConnectionFactory::get_instance();
 //        //$Connection1 = $ConnectionFactory->get_connection(\Guzaba2\Database\Sql\Mysql\ConnectionCoroutine::class);
 //        $Connection1 = self::ConnectionFactory()->get_connection(MysqlConnection::class);
