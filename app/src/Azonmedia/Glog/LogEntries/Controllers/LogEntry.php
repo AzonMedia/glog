@@ -75,8 +75,21 @@ class LogEntry extends Controller
         //$o = new MysqlTest();
 
 
-        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
-        $LogEntry->test();
+        //$LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
+        //print 'ctrl';
+        try {
+            $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+        //} catch (\Azonmedia\Lock\Interfaces\LockExceptionInterface $Exception) {
+        } catch (\Azonmedia\Lock\Exceptions\LockException $Exception) {
+            print 'UNABLE TO OBTAIN'.PHP_EOL;
+        }
+
+        //$LogEntry->log_entry_content = 'sdf34f3';
+        //$LogEntry->save();
+        //$LogEntry->test();
+
+        //$LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+        //print $LogEntry->log_entry_content;
 
         /*
         $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
@@ -88,12 +101,40 @@ class LogEntry extends Controller
         print $LogEntry->log_entry_content;
         */
 
+        //$this->test1();
+        //$this->test3();
 
         $data = 'ok';
         //$data = 'cnt coroutines: '.count(Coroutine::$coroutines_ids);
         $Response = parent::get_stream_ok_response($data);
         //$Response = parent::get_string_ok_response($data);
         return $Response;
+    }
+
+    public function test1() {
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+        $LogEntry->log_entry_content = 'aaa222';
+        $this->test2();
+        print $LogEntry->log_entry_content.PHP_EOL;
+        $LogEntry->save();
+    }
+
+    public function test2() {
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+        print $LogEntry->log_entry_content.PHP_EOL;
+        $LogEntry->log_entry_content = 'fffgggg';
+    }
+
+    public function test3() {
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+        $LogEntry->log_entry_content = 'aaa222343';
+        print $LogEntry->is_modified().'aaa';
+        $this->test4();
+    }
+
+    public function test4() {
+        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+        print $LogEntry->is_modified().'bbb';//this will say it is not modified... as this is a different object
     }
 
     public function create() : ResponseInterface

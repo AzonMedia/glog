@@ -16,15 +16,12 @@ class LogEntry extends ActiveRecord
         'services'      => [
             'ConnectionFactory'
         ],
-        'main_table'    => 'log_entries',
+        'main_table'    => 'log_entries',//defines the storage key
     ];
 
     protected const CONFIG_RUNTIME = [];
 
-    /**
-     * @var string
-     */
-    //protected $entry_data;
+
 
     /**
      * When the log entry was accepted for logging (which is different from when the actual event occurred which is provided in the json_data)

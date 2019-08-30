@@ -17,8 +17,10 @@ use Guzaba2\Mvc\ExecutorMiddleware;
 use Guzaba2\Mvc\RoutingMiddleware;
 use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Guzaba2\Registry\Interfaces\RegistryInterface;
+use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Psr\Log\LogLevel;
 
 $autoload_path = realpath(__DIR__ . '/../../vendor/autoload.php');
 require_once($autoload_path);
@@ -57,7 +59,21 @@ const APP_CONFIG = [
 
 
     $Logger = new Logger('main_logger');
-    $Logger->pushHandler(new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt'));
+    $Formatter = new LineFormatter(
+        null, // Format of message in log, default [%datetime%] %channel%.%level_name%: %message% %context% %extra%\n
+        null, // Datetime format
+        true, // allowInlineLineBreaks option, default false
+        true  // ignoreEmptyContextAndExtra option, default false
+    );
+    //$Logger->pushHandler(new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt', LogLevel::WARNING));
+    $FileHandler = new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt', LogLevel::INFO);
+    $FileHandler->setFormatter($Formatter);
+    $Logger->pushHandler($FileHandler);
+    //$Logger->pushHandler(new StreamHandler('php://stdout', LogLevel::WARNING));
+
+    $StdoutHandler = new StreamHandler('php://stdout', LogLevel::INFO);
+    $StdoutHandler->setFormatter($Formatter);
+    $Logger->pushHandler($StdoutHandler);
 
 
     Kernel::initialize($Registry, $Logger);
