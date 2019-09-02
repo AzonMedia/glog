@@ -79,9 +79,10 @@ class LogEntry extends Controller
         //print 'ctrl';
         try {
             $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
+            $LogEntry->test55($this->get_request());
         //} catch (\Azonmedia\Lock\Interfaces\LockExceptionInterface $Exception) {
         } catch (\Azonmedia\Lock\Exceptions\LockException $Exception) {
-            print 'UNABLE TO OBTAIN'.PHP_EOL;
+            print $Exception->getMessage().PHP_EOL;
         }
 
         //$LogEntry->log_entry_content = 'sdf34f3';
@@ -104,7 +105,7 @@ class LogEntry extends Controller
         //$this->test1();
         //$this->test3();
 
-        $data = 'ok';
+        $data = 'ok from '.$this->get_request()->getServer()->get_swoole_server()->worker_id;
         //$data = 'cnt coroutines: '.count(Coroutine::$coroutines_ids);
         $Response = parent::get_stream_ok_response($data);
         //$Response = parent::get_string_ok_response($data);

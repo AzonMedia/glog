@@ -3,6 +3,7 @@
 namespace Azonmedia\Glog\LogEntries\Models;
 
 use Azonmedia\Glog\Application\MysqlConnection;
+use Azonmedia\Lock\Interfaces\LockInterface;
 use Guzaba2\Base\Base;
 use Guzaba2\Base\Exceptions\RunTimeException;
 use Guzaba2\Coroutine\Coroutine;
@@ -41,11 +42,6 @@ class LogEntry extends ActiveRecord
 //        //$this->entry_data = $entry_data ?? ['message' => 'parsing json failed'];
 //        $this->entry_data = $entry_data ?? ['message' => $json_data];//if the decoding failed just put as message the provided string
 //        $this->accepted_microtime = microtime(TRUE);
-    }
-
-    public function __toString() : string
-    {
-        return print_r($this->entry_data, TRUE);
     }
 
     public function get_data() : array
@@ -140,6 +136,27 @@ class LogEntry extends ActiveRecord
 //            ],
 //        ];
 //        $Connection1->execute_multiple_queries($queries);
+
+    }
+
+    public function test55($Request)
+    {
+        print $Request->getServer()->get_worker_id().' start: '.microtime(true).PHP_EOL;
+
+        //self::LockManager()->acquire_lock('aa', LockInterface::LOCK_PW);
+        //self::LockManager()->acquire_lock('aa', LockInterface::LOCK_PW);
+        self::LockManager()->acquire_lock($this, LockInterface::LOCK_PW);
+        print $Request->getServer()->get_worker_id().' lock obtained: '.microtime(true).PHP_EOL;
+        //\co::sleep(3);
+
+
+        print $Request->getServer()->get_worker_id().' end: '.microtime(true).PHP_EOL;
+
+        print_r(self::LockManager()->get_all_own_locks());
+        self::LockManager()->release_lock($this);
+        print_r(self::LockManager()->get_all_own_locks());
+
+        print self::LockManager()->get_lock_level($this).PHP_EOL;
 
     }
 }

@@ -49,6 +49,8 @@ const APP_CONFIG = [
     //\Swoole\Coroutine::set([ 'enable_preemptive_scheduler' => 1 ]);
     //the above is available in Master branch only not released yet
 
+    $log_level = LogLevel::DEBUG;
+
     $initial_directory = getcwd();
     $app_directory = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 
@@ -60,18 +62,18 @@ const APP_CONFIG = [
 
     $Logger = new Logger('main_logger');
     $Formatter = new LineFormatter(
-        null, // Format of message in log, default [%datetime%] %channel%.%level_name%: %message% %context% %extra%\n
-        null, // Datetime format
-        true, // allowInlineLineBreaks option, default false
-        true  // ignoreEmptyContextAndExtra option, default false
+        NULL, // Format of message in log, default [%datetime%] %channel%.%level_name%: %message% %context% %extra%\n
+        NULL, // Datetime format
+        TRUE, // allowInlineLineBreaks option, default false
+        TRUE  // ignoreEmptyContextAndExtra option, default false
     );
-    //$Logger->pushHandler(new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt', LogLevel::WARNING));
-    $FileHandler = new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt', LogLevel::INFO);
+
+    $FileHandler = new StreamHandler($app_directory.'logs'.DIRECTORY_SEPARATOR.'LOG.txt', $log_level);
     $FileHandler->setFormatter($Formatter);
     $Logger->pushHandler($FileHandler);
-    //$Logger->pushHandler(new StreamHandler('php://stdout', LogLevel::WARNING));
 
-    $StdoutHandler = new StreamHandler('php://stdout', LogLevel::INFO);
+
+    $StdoutHandler = new StreamHandler('php://stdout', $log_level);
     $StdoutHandler->setFormatter($Formatter);
     $Logger->pushHandler($StdoutHandler);
 
