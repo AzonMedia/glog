@@ -19,7 +19,7 @@ class GlogMiddleware extends Base
 {
 
     protected const CONFIG_DEFAULTS = [
-        'disable_locking_on_get'    => FALSE,
+        'disable_locking_on_get'    => TRUE,
     ];
 
     protected const CONFIG_RUNTIME = [];
