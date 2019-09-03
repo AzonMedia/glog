@@ -79,7 +79,7 @@ class LogEntry extends Controller
         //print 'ctrl';
         try {
             $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
-            $LogEntry->test55($this->get_request());
+            //$LogEntry->test55($this->get_request());
         //} catch (\Azonmedia\Lock\Interfaces\LockExceptionInterface $Exception) {
         } catch (\Azonmedia\Lock\Exceptions\LockException $Exception) {
             print $Exception->getMessage().PHP_EOL;

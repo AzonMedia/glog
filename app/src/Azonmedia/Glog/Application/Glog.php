@@ -42,7 +42,7 @@ class Glog extends Application
         'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
             'host'              => '0.0.0.0',
             'port'              => 8081,
-            'worker_num'        => 12,//http workers
+            'worker_num'        => 24,//http workers
             //Swoole\Coroutine::create(): Unable to use async-io in task processes, please set `task_enable_coroutine` to true.
             //'task_worker_num'   => 8,//tasks workers
             'task_worker_num'   => 0,//tasks workers
@@ -117,6 +117,7 @@ class Glog extends Application
 
         //custom middleware for the app
         //$ServingMiddleware = new ServingMiddleware($HttpServer, []);//this serves all requests
+        $GlogMiddleware = new GlogMiddleware($this, $HttpServer);
 
         $ExecutorMiddleware = new ExecutorMiddleware($HttpServer);
 
@@ -125,6 +126,7 @@ class Glog extends Application
         $middlewares[] = $RewritingMiddleware;
         $middlewares[] = $RoutingMiddleware;
         //$middlewares[] = $ServingMiddleware;//this is a custom middleware
+        $middlewares[] = $GlogMiddleware;//custom middlware used by this app
         $middlewares[] = $ExecutorMiddleware;
 
         $DefaultResponseBody = new Stream();

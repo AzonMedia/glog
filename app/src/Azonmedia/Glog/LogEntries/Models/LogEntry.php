@@ -22,14 +22,6 @@ class LogEntry extends ActiveRecord
 
     protected const CONFIG_RUNTIME = [];
 
-
-
-    /**
-     * When the log entry was accepted for logging (which is different from when the actual event occurred which is provided in the json_data)
-     * @var int
-     */
-    //protected $accepted_microtime;
-
     //public function __construct(string $json_data)
     public function __construct(int $index)
     {
