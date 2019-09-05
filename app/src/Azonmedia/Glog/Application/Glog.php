@@ -4,6 +4,7 @@ namespace Azonmedia\Glog\Application;
 
 
 use Azonmedia\Glog\Home\Controllers\Home;
+use Azonmedia\Glog\LogEntries\Controllers\LogEntries;
 use Azonmedia\Glog\LogEntries\Controllers\LogEntry;
 //use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Azonmedia\Glog\Storage\StorageProviderFile;
@@ -99,18 +100,20 @@ class Glog extends Application
         $RewritingMiddleware = new RewritingMiddleware($HttpServer, $Rewriter);
 
         $routing_table = [
-            '/'             => [
-                Method::HTTP_GET        => [Home::class, 'view'],
+            '/'                                     => [
+                Method::HTTP_GET                        => [Home::class, 'view'],
             ],
-            '/log-entry'    => [
-                Method::HTTP_GET        => [LogEntry::class, 'view'],
-                Method::HTTP_POST       => [LogEntry::class, 'create'],
-                Method::HTTP_PUT        => [LogEntry::class, 'update'],
-                Method::HTTP_DELETE     => [LogEntry::class, 'delete'],
-                //Method::HTTP_HEAD       => [LogEntry::class, 'head'],
-                //Method::HTTP_OPTIONS    => [LogEntry::class, 'options'],
+            '/log-entry'                            => [
+                Method::HTTP_POST                       => [LogEntry::class, 'create'],
             ],
-            '/log-entries'  => [],
+            '/log-entry/{id}'                       => [
+                Method::HTTP_GET                        => [LogEntry::class, 'view'],
+                Method::HTTP_PUT | Method::HTTP_PATCH   => [LogEntry::class, 'update'],
+                Method::HTTP_DELETE                     => [LogEntry::class, 'delete'],
+            ],
+            '/log-entries'                          => [
+                Method::HTTP_GET                        => [LogEntries::class, 'view'],
+            ],
         ];
         $Router = new Router(new RoutingMapArray($routing_table));
         $RoutingMiddleware = new RoutingMiddleware($HttpServer, $Router);
