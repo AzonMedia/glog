@@ -22,20 +22,6 @@ class LogEntry extends ActiveRecord
 
     protected const CONFIG_RUNTIME = [];
 
-    //public function __construct(string $json_data)
-    public function __construct(int $index)
-    {
-        parent::__construct($index);
-
-        //print_r(self::CONFIG_RUNTIME);
-        //print_r(get_declared_classes());
-
-//        $entry_data = json_decode($json_data);
-//        //$this->entry_data = $entry_data ?? ['message' => 'parsing json failed'];
-//        $this->entry_data = $entry_data ?? ['message' => $json_data];//if the decoding failed just put as message the provided string
-//        $this->accepted_microtime = microtime(TRUE);
-    }
-
     public function get_data() : array
     {
         return $this->entry_data;
