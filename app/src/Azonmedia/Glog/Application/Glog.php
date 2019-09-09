@@ -29,7 +29,9 @@ use Guzaba2\Mvc\RoutingMiddleware;
 use Guzaba2\Swoole\ApplicationMiddleware;
 use Guzaba2\Mvc\RestMiddleware;
 //use Guzaba2\Swoole\WorkerHandler;
+use Guzaba2\Swoole\Handlers\WorkerConnect;
 use Guzaba2\Swoole\Handlers\WorkerStart;
+use Guzaba2\Authorization\IpBlackList;
 
 /**
  * Class Glog
@@ -84,8 +86,8 @@ class Glog extends Application
 //    $middlewares[] = new ExecutorMiddleware();
         //PresenterMiddleware
 
-
-
+        $IpFilter = new IpBlackList();
+        kernel::set_ip_filter($IpFilter);
 
         $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole']);
 
@@ -138,6 +140,7 @@ class Glog extends Application
         //$RequestHandler = new \Guzaba2\Swoole\RequestHandler($middlewares, $HttpServer, $DefaultResponse);
         $RequestHandler = new \Guzaba2\Swoole\Handlers\Http\Request($HttpServer, $middlewares, $DefaultResponse);
 
+        $ConnectHandler = new WorkerConnect($HttpServer);
         //$WorkerHandler = new WorkerHandler($HttpServer);
         $WorkerHandler = new WorkerStart($HttpServer);
 
@@ -158,8 +161,7 @@ class Glog extends Application
 
         //$Services = new Services
 
-
-
+        $HttpServer->on('Connect', $ConnectHandler);
         $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('Request', $RequestHandler);
 
