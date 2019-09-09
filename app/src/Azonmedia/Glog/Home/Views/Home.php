@@ -11,7 +11,7 @@ class Home extends PhpView
     {
         $structure = $this->Response->getBody()->getStructure();//no reference as it is only for reading
         ?>
-<h1><?=$structure['message']?></h1>
+<h3><?=$structure['message']?></h3>
         <?php
     }
 

@@ -14,8 +14,12 @@ class Home extends Controller
 
         $Response = parent::get_structured_ok_response();
         $struct =& $Response->getBody()->getStructure();
-        $struct['message'] = sprintf(t::_('This is the home page'));
-
+        $struct['message'] = sprintf(t::_('This is the home page baby'));
+        
+        $log_entry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
+        $log_entry->log_entry_content = 'content';
+        $log_entry->save();
+        
         return $Response;
     }
 

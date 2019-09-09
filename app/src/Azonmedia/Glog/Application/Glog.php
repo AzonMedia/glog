@@ -41,7 +41,7 @@ class Glog extends Application
     protected const CONFIG_DEFAULTS = [
         'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
             'host'              => '0.0.0.0',
-            'port'              => 8081,
+            'port'              => 8082,
             'worker_num'        => 24,//http workers
             //Swoole\Coroutine::create(): Unable to use async-io in task processes, please set `task_enable_coroutine` to true.
             //'task_worker_num'   => 8,//tasks workers
@@ -76,7 +76,10 @@ class Glog extends Application
 
         $DependencyContainer = new Container();
         kernel::set_di_container($DependencyContainer);
-
+        
+        $Watchdog = new \Azonmedia\Watchdog\Watchdog();
+        kernel::set_watchdog($Watchdog);
+        
         $middlewares = [];
 //    $middlewares[] = new RoutingMiddleware();
 //    $middlewares[] = new FilteringMiddleware();
@@ -141,6 +144,7 @@ class Glog extends Application
         //$WorkerHandler = new WorkerHandler($HttpServer);
         $WorkerHandler = new WorkerStart($HttpServer);
 
+
         //https://github.com/swoole/swoole-docs/blob/master/get-started/examples/async_task.md
         //$TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
         //$TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
@@ -163,6 +167,7 @@ class Glog extends Application
         $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('Request', $RequestHandler);
 
+
         //$HttpServer->on('Task', $TaskHandler);
         //$HttpServer->on('finish', $FinishHandler);
 
@@ -174,7 +179,9 @@ class Glog extends Application
         //$HttpServer->table = $table;
 
         $HttpServer->start();
-
+        
+                 \Guzaba2\Kernel\Kernel::logtofile('kurvii', array('aide we'));
+        
         return Kernel::EXIT_SUCCESS;
     }
 }

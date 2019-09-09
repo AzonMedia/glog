@@ -49,7 +49,7 @@ const APP_CONFIG = [
     //\Swoole\Coroutine::set([ 'enable_preemptive_scheduler' => 1 ]);
     //the above is available in Master branch only not released yet
 
-    $log_level = LogLevel::WARNING;
+    $log_level = LogLevel::DEBUG;
 
     $initial_directory = getcwd();
     $app_directory = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;

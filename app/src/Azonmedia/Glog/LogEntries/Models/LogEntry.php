@@ -18,6 +18,7 @@ class LogEntry extends ActiveRecord
             'ConnectionFactory'
         ],
         'main_table'    => 'log_entries',//defines the storage key
+
     ];
 
     protected const CONFIG_RUNTIME = [];
@@ -44,6 +45,16 @@ class LogEntry extends ActiveRecord
     public function get_accepted_microtime() : float
     {
         return $this->accepted_microtime;
+    }
+    
+    public function _before_save()
+    {
+       
+    }
+    
+    public function _after_save()
+    {
+       
     }
 
     public function test() : void
