@@ -124,12 +124,13 @@ class Glog extends Application
 
         $ExecutorMiddleware = new ExecutorMiddleware($HttpServer);
 
-        $middlewares[] = $RestMiddleware;
-        $middlewares[] = $ApplicationMiddleware;
-        $middlewares[] = $RewritingMiddleware;
+        //adding middlewares slows down significantly the processing
+        //$middlewares[] = $RestMiddleware;
+        //$middlewares[] = $ApplicationMiddleware;
+        //$middlewares[] = $RewritingMiddleware;
         $middlewares[] = $RoutingMiddleware;
         //$middlewares[] = $ServingMiddleware;//this is a custom middleware
-        $middlewares[] = $GlogMiddleware;//custom middlware used by this app
+        $middlewares[] = $GlogMiddleware;//custom middleware used by this app - disables locking on ActiveRecord on read (get) requests
         $middlewares[] = $ExecutorMiddleware;
 
         $DefaultResponseBody = new Stream();

@@ -51,7 +51,7 @@ class GlogMiddleware extends Base
      */
     public function process(ServerRequestInterface $Request, RequestHandlerInterface $Handler) : ResponseInterface
     {
-        if ($Request->getMethod() === 'GET' && self::CONFIG_RUNTIME['disable_locking_on_get']) {
+        if ($Request->getMethodConstant() === Method::HTTP_GET && self::CONFIG_RUNTIME['disable_locking_on_get']) {
             ActiveRecord::disable_locking();
         }
         $Response = $Handler->handle($Request);

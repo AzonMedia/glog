@@ -43,6 +43,7 @@ class LogEntry extends Controller
 //        //$Response = parent::get_string_ok_response($data);
 //        return $Response;
 
+
         try {
             $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry( $id );
 
@@ -55,6 +56,11 @@ class LogEntry extends Controller
             $structure['message'] = sprintf(t::_('There is no log entry with id %s.'), $id);
         }
         return $Response;
+
+        //$data = 'ok';
+        //$Response = parent::get_string_ok_response($data);
+        //return $Response;
+
     }
 
 //    public function test1() {
