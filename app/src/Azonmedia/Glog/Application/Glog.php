@@ -4,6 +4,7 @@ namespace Azonmedia\Glog\Application;
 
 
 use Azonmedia\Glog\Home\Controllers\Home;
+use Azonmedia\Glog\LogEntries\Controllers\LogEntries;
 use Azonmedia\Glog\LogEntries\Controllers\LogEntry;
 //use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Azonmedia\Glog\Storage\StorageProviderFile;
@@ -29,7 +30,9 @@ use Guzaba2\Mvc\RoutingMiddleware;
 use Guzaba2\Swoole\ApplicationMiddleware;
 use Guzaba2\Mvc\RestMiddleware;
 //use Guzaba2\Swoole\WorkerHandler;
+use Guzaba2\Swoole\Handlers\WorkerConnect;
 use Guzaba2\Swoole\Handlers\WorkerStart;
+use Guzaba2\Authorization\IpBlackList;
 
 /**
  * Class Glog
@@ -87,8 +90,8 @@ class Glog extends Application
 //    $middlewares[] = new ExecutorMiddleware();
         //PresenterMiddleware
 
-
-
+        $IpFilter = new IpBlackList();
+        kernel::set_ip_filter($IpFilter);
 
         $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole']);
 
@@ -102,18 +105,20 @@ class Glog extends Application
         $RewritingMiddleware = new RewritingMiddleware($HttpServer, $Rewriter);
 
         $routing_table = [
-            '/'             => [
-                Method::HTTP_GET        => [Home::class, 'view'],
+            '/'                                     => [
+                Method::HTTP_GET                        => [Home::class, 'view'],
             ],
-            '/log-entry'    => [
-                Method::HTTP_GET        => [LogEntry::class, 'view'],
-                Method::HTTP_POST       => [LogEntry::class, 'create'],
-                Method::HTTP_PUT        => [LogEntry::class, 'update'],
-                Method::HTTP_DELETE     => [LogEntry::class, 'delete'],
-                //Method::HTTP_HEAD       => [LogEntry::class, 'head'],
-                //Method::HTTP_OPTIONS    => [LogEntry::class, 'options'],
+            '/log-entry'                            => [
+                Method::HTTP_POST                       => [LogEntry::class, 'create'],
             ],
-            '/log-entries'  => [],
+            '/log-entry/{id}'                       => [
+                Method::HTTP_GET                        => [LogEntry::class, 'view'],
+                Method::HTTP_PUT | Method::HTTP_PATCH   => [LogEntry::class, 'update'],
+                Method::HTTP_DELETE                     => [LogEntry::class, 'delete'],
+            ],
+            '/log-entries'                          => [
+                Method::HTTP_GET                        => [LogEntries::class, 'view'],
+            ],
         ];
         $Router = new Router(new RoutingMapArray($routing_table));
         $RoutingMiddleware = new RoutingMiddleware($HttpServer, $Router);
@@ -124,12 +129,13 @@ class Glog extends Application
 
         $ExecutorMiddleware = new ExecutorMiddleware($HttpServer);
 
-        $middlewares[] = $RestMiddleware;
-        $middlewares[] = $ApplicationMiddleware;
-        $middlewares[] = $RewritingMiddleware;
+        //adding middlewares slows down significantly the processing
+        //$middlewares[] = $RestMiddleware;
+        //$middlewares[] = $ApplicationMiddleware;
+        //$middlewares[] = $RewritingMiddleware;
         $middlewares[] = $RoutingMiddleware;
         //$middlewares[] = $ServingMiddleware;//this is a custom middleware
-        $middlewares[] = $GlogMiddleware;//custom middlware used by this app
+        $middlewares[] = $GlogMiddleware;//custom middleware used by this app - disables locking on ActiveRecord on read (get) requests
         $middlewares[] = $ExecutorMiddleware;
 
         $DefaultResponseBody = new Stream();
@@ -141,6 +147,7 @@ class Glog extends Application
         //$RequestHandler = new \Guzaba2\Swoole\RequestHandler($middlewares, $HttpServer, $DefaultResponse);
         $RequestHandler = new \Guzaba2\Swoole\Handlers\Http\Request($HttpServer, $middlewares, $DefaultResponse);
 
+        $ConnectHandler = new WorkerConnect($HttpServer);
         //$WorkerHandler = new WorkerHandler($HttpServer);
         $WorkerHandler = new WorkerStart($HttpServer);
 
@@ -162,8 +169,7 @@ class Glog extends Application
 
         //$Services = new Services
 
-
-
+        $HttpServer->on('Connect', $ConnectHandler);
         $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('Request', $RequestHandler);
 
