@@ -13,9 +13,10 @@ class Home extends Controller
     public function view() : ResponseInterface
     {
         \Swoole\Runtime::enableCoroutine(true, SWOOLE_HOOK_ALL ^ SWOOLE_HOOK_FILE);
+
         $Response = parent::get_structured_ok_response();
         $struct =& $Response->getBody()->getStructure();
-        $struct['message'] = sprintf(t::_('This is the home page baby'));
+        $struct['message'] = sprintf(t::_('This is the home page babyyyy'));
         
         $log_entry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
         $log_entry->log_entry_content = 'content';

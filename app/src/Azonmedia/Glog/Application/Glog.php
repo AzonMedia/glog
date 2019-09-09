@@ -75,12 +75,10 @@ class Glog extends Application
 
     public function execute() : int
     {
-
-
         $DependencyContainer = new Container();
         kernel::set_di_container($DependencyContainer);
         
-        $Watchdog = new \Azonmedia\Watchdog\Watchdog();
+        $Watchdog = new \Azonmedia\Watchdog\Watchdog(new \Azonmedia\Watchdog\Backends\SwooleTableBackend());
         kernel::set_watchdog($Watchdog);
         
         $middlewares = [];
@@ -170,6 +168,12 @@ class Glog extends Application
         //$Services = new Services
 
         $HttpServer->on('Connect', $ConnectHandler);
+
+
+        print_r('glog');
+        
+        \Guzaba2\Kernel\Kernel::logtofile('z_glog', array('z1'));
+
         $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('Request', $RequestHandler);
 
@@ -185,8 +189,6 @@ class Glog extends Application
         //$HttpServer->table = $table;
 
         $HttpServer->start();
-        
-                 \Guzaba2\Kernel\Kernel::logtofile('kurvii', array('aide we'));
         
         return Kernel::EXIT_SUCCESS;
     }
