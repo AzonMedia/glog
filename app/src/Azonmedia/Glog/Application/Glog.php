@@ -78,8 +78,8 @@ class Glog extends Application
         $DependencyContainer = new Container();
         kernel::set_di_container($DependencyContainer);
         
-        $Watchdog = new \Azonmedia\Watchdog\Watchdog(new \Azonmedia\Watchdog\Backends\SwooleTableBackend());
-        kernel::set_watchdog($Watchdog);
+        //$Watchdog = new \Azonmedia\Watchdog\Watchdog(new \Azonmedia\Watchdog\Backends\SwooleTableBackend());
+        //kernel::set_watchdog($Watchdog);
         
         $middlewares = [];
 //    $middlewares[] = new RoutingMiddleware();
