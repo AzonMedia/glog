@@ -7,9 +7,21 @@ use Guzaba2\Http\UploadedFile;
 use Guzaba2\Coroutine\Coroutine;
 use Psr\Http\Message\ResponseInterface;
 use Guzaba2\Translator\Translator as t;
+use Azonmedia\Glog\Application\MysqlConnection;
+use Guzaba2\Database\ConnectionFactory;
 
 class Home extends Controller
 {
+
+    protected const CONFIG_DEFAULTS = [
+        'services'      => [
+            'ConnectionFactory'
+        ],
+        'main_table'    => 'some_table',//defines the storage key
+    ];
+
+    protected const CONFIG_RUNTIME = [];
+
     public function view() : ResponseInterface
     {
         \Swoole\Runtime::enableCoroutine(true, SWOOLE_HOOK_ALL ^ SWOOLE_HOOK_FILE);
@@ -24,6 +36,28 @@ class Home extends Controller
         
         return $Response;
     }
+
+    /**
+     * Test Mysql Ping
+     */
+    // private function testMysql()
+    // {
+    //     $Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR1);
+
+    //     $startF = microtime(true);
+
+    //     $query = "SELECT * FROM " . self::CONFIG_RUNTIME['main_table'];
+
+    //     $Statement = $Connection->prepare($query);
+    //     $Statement->execute();
+    //     $data = $Statement->fetchAll();
+
+    //     $endF = microtime(true);
+
+    //     echo "executed in " . ($endF - $startF) . " s \n";
+
+    //     \co::sleep(4);
+    // }
 
     /**
      * Test MongoDB

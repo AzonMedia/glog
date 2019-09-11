@@ -81,15 +81,15 @@ class Glog extends Application
         $Watchdog = new \Azonmedia\Watchdog\Watchdog(new \Azonmedia\Watchdog\Backends\SwooleTableBackend());
         kernel::set_watchdog($Watchdog);
         
-        $middlewares = [];
-//    $middlewares[] = new RoutingMiddleware();
-//    $middlewares[] = new FilteringMiddleware();
-//    $middlewares[] = new AuthorizationMiddleware();
-//    $middlewares[] = new ExecutorMiddleware();
-        //PresenterMiddleware
-
         $IpFilter = new IpBlackList();
         kernel::set_ip_filter($IpFilter);
+
+        $middlewares = [];
+        // $middlewares[] = new RoutingMiddleware();
+        // $middlewares[] = new FilteringMiddleware();
+        // $middlewares[] = new AuthorizationMiddleware();
+        // $middlewares[] = new ExecutorMiddleware();
+        //PresenterMiddleware
 
         $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole']);
 
@@ -118,6 +118,7 @@ class Glog extends Application
                 Method::HTTP_GET                        => [LogEntries::class, 'view'],
             ],
         ];
+
         $Router = new Router(new RoutingMapArray($routing_table));
         $RoutingMiddleware = new RoutingMiddleware($HttpServer, $Router);
 
@@ -149,13 +150,11 @@ class Glog extends Application
         //$WorkerHandler = new WorkerHandler($HttpServer);
         $WorkerHandler = new WorkerStart($HttpServer);
 
-
         //https://github.com/swoole/swoole-docs/blob/master/get-started/examples/async_task.md
         //$TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
         //$TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
 
         //$FinishHandler = new FinishHandler();
-
 
         //$Pool = new Pool();
         //$Pool->initialize(self::CONFIG_RUNTIME['pool']);
@@ -171,14 +170,13 @@ class Glog extends Application
         $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('Request', $RequestHandler);
 
-
         //$HttpServer->on('Task', $TaskHandler);
         //$HttpServer->on('finish', $FinishHandler);
 
-//        $table = new \Swoole\Table(100);
-//        $table->column('id', \Swoole\Table::TYPE_INT);
-//        $table->column('data', \Swoole\Table::TYPE_STRING, 128);
-//        $table->create();
+        // $table = new \Swoole\Table(100);
+        // $table->column('id', \Swoole\Table::TYPE_INT);
+        // $table->column('data', \Swoole\Table::TYPE_STRING, 128);
+        // $table->create();
 
         //$HttpServer->table = $table;
 
