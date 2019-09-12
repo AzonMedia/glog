@@ -36,7 +36,6 @@ use Guzaba2\Authorization\IpBlackList;
 
 /**
  * Class Glog
- * This is a configuration file. Has no methods and can not be instantiated
  * @package Azonmedia\Glog\Application
  */
 class Glog extends Application
@@ -44,14 +43,14 @@ class Glog extends Application
     protected const CONFIG_DEFAULTS = [
         'swoole' => [ 
             'host'              => '0.0.0.0',
-            'port'              => 8082,            
+            'port'              => 8082,
+            'server_options'    => [ //this array will be passed to $SwooleHttpServer->set()
+                'worker_num'        => 4,//http workers
+                //Swoole\Coroutine::create(): Unable to use async-io in task processes, please set `task_enable_coroutine` to true.
+                //'task_worker_num'   => 8,//tasks workers
+                'task_worker_num'   => 0,//tasks workers
+            ],
         ],
-        'swoole_server_options' => [ //this array will be passed to $SwooleHttpServer->set()
-            'worker_num'        => 4,//http workers
-            //Swoole\Coroutine::create(): Unable to use async-io in task processes, please set `task_enable_coroutine` to true.
-            //'task_worker_num'   => 8,//tasks workers
-            'task_worker_num'   => 0,//tasks workers
-        ]
     ];
 
     protected const CONFIG_RUNTIME = [];
@@ -93,7 +92,10 @@ class Glog extends Application
         // $middlewares[] = new ExecutorMiddleware();
         //PresenterMiddleware
 
-        $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole_server_options']);
+        $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole']['server_options']);
+
+        Kernel::set_http_server($HttpServer);
+
 
         // disable coroutine for debugging
         // $HttpServer->set(['enable_coroutine' => false,]);
@@ -172,15 +174,6 @@ class Glog extends Application
         $HttpServer->on('WorkerStart', $WorkerHandler);
         $HttpServer->on('Request', $RequestHandler);
 
-        //$HttpServer->on('Task', $TaskHandler);
-        //$HttpServer->on('finish', $FinishHandler);
-
-        // $table = new \Swoole\Table(100);
-        // $table->column('id', \Swoole\Table::TYPE_INT);
-        // $table->column('data', \Swoole\Table::TYPE_STRING, 128);
-        // $table->create();
-
-        //$HttpServer->table = $table;
 
         $HttpServer->start();
         

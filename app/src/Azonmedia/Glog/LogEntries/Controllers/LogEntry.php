@@ -47,6 +47,12 @@ class LogEntry extends Controller
         try {
             $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry( $id );
 
+            $LogEntry->log_entry_content = 'asasdasd';
+            $LogEntry->log_entry_content = 'asasdasd2';
+            //print_r($LogEntry->get_property_old_values('log_entry_content'));
+            //$LogEntry->get_property_old_values('log_entry_content')[0];
+            //print $LogEntry->get_property_old_value('log_entry_content');
+
             $Response = parent::get_structured_ok_response();
             $structure =& $Response->getBody()->getStructure();
             $structure = array_merge($structure, $LogEntry->get_record_data(), $LogEntry->get_meta_data());
@@ -96,7 +102,6 @@ class LogEntry extends Controller
 
     public function create() : ResponseInterface
     {
-        print 'AAAA';
         $Response = parent::get_structured_ok_response();
         $struct =& $Response->getBody()->getStructure();
         $struct['message'] = sprintf(t::_('The log entry is accepted.'));
