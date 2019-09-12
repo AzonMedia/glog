@@ -44,12 +44,14 @@ class Glog extends Application
     protected const CONFIG_DEFAULTS = [
         'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
             'host'              => '0.0.0.0',
-            'port'              => 8082,
+            'port'              => 8082,            
+        ],
+        'swoole_server_options' => [
             'worker_num'        => 4,//http workers
             //Swoole\Coroutine::create(): Unable to use async-io in task processes, please set `task_enable_coroutine` to true.
             //'task_worker_num'   => 8,//tasks workers
             'task_worker_num'   => 0,//tasks workers
-        ],
+        ]
     ];
 
     protected const CONFIG_RUNTIME = [];
@@ -91,7 +93,7 @@ class Glog extends Application
         // $middlewares[] = new ExecutorMiddleware();
         //PresenterMiddleware
 
-        $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole']);
+        $HttpServer = new \Guzaba2\Swoole\Server(self::CONFIG_RUNTIME['swoole']['host'], self::CONFIG_RUNTIME['swoole']['port'], self::CONFIG_RUNTIME['swoole_server_options']);
 
         // disable coroutine for debugging
         // $HttpServer->set(['enable_coroutine' => false,]);
