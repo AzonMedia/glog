@@ -42,11 +42,11 @@ use Guzaba2\Authorization\IpBlackList;
 class Glog extends Application
 {
     protected const CONFIG_DEFAULTS = [
-        'swoole' => [ //this array will be passed to $SwooleHttpServer->set()
+        'swoole' => [ 
             'host'              => '0.0.0.0',
             'port'              => 8082,            
         ],
-        'swoole_server_options' => [
+        'swoole_server_options' => [ //this array will be passed to $SwooleHttpServer->set()
             'worker_num'        => 4,//http workers
             //Swoole\Coroutine::create(): Unable to use async-io in task processes, please set `task_enable_coroutine` to true.
             //'task_worker_num'   => 8,//tasks workers
