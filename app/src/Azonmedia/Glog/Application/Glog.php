@@ -32,7 +32,7 @@ use Guzaba2\Mvc\RestMiddleware;
 //use Guzaba2\Swoole\WorkerHandler;
 use Guzaba2\Swoole\Handlers\WorkerConnect;
 use Guzaba2\Swoole\Handlers\WorkerStart;
-use Guzaba2\Authorization\IpBlackList;
+use Guzaba2\Authorization\IpFilter;
 
 /**
  * Class Glog
@@ -82,9 +82,6 @@ class Glog extends Application
         $Watchdog = new \Azonmedia\Watchdog\Watchdog(new \Azonmedia\Watchdog\Backends\SwooleTableBackend());
         kernel::set_watchdog($Watchdog);
         
-        $IpFilter = new IpBlackList();
-        kernel::set_ip_filter($IpFilter);
-
         $middlewares = [];
         // $middlewares[] = new RoutingMiddleware();
         // $middlewares[] = new FilteringMiddleware();
@@ -150,7 +147,7 @@ class Glog extends Application
         //$RequestHandler = new \Guzaba2\Swoole\RequestHandler($middlewares, $HttpServer, $DefaultResponse);
         $RequestHandler = new \Guzaba2\Swoole\Handlers\Http\Request($HttpServer, $middlewares, $DefaultResponse);
 
-        $ConnectHandler = new WorkerConnect($HttpServer);
+        $ConnectHandler = new WorkerConnect($HttpServer, new IpFilter());
         //$WorkerHandler = new WorkerHandler($HttpServer);
         $WorkerHandler = new WorkerStart($HttpServer);
 
