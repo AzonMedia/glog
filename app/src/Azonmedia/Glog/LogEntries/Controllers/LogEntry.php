@@ -35,7 +35,7 @@ class LogEntry extends Controller
 //        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry( ['log_entry_content' => 'test1'] );
 //        //print $LogEntry->get_index().' '.$LogEntry->log_entry_content;
 //
-//        //\Co::sleep(15);
+//        //\Swoole\Coroutine\System::sleep(15);
 //
 //        $data = 'ok from '.$this->get_request()->getServer()->get_swoole_server()->worker_id;
 //        //$data = 'cnt coroutines: '.count(Coroutine::$coroutines_ids);

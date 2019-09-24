@@ -56,7 +56,7 @@ class Home extends Controller
 
     //     echo "executed in " . ($endF - $startF) . " s \n";
 
-    //     \co::sleep(4);
+    //     \Swoole\Coroutine\System::sleep(4);
     // }
 
     /**
@@ -66,7 +66,7 @@ class Home extends Controller
     // {
     //     $F = function(){
     //         echo "\nstart\n";
-    //         // \co::sleep(2);
+    //         // \Swoole\Coroutine\System::sleep(2);
 
     //         $startF = microtime(true);
 

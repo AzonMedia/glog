@@ -57,7 +57,7 @@ class LogEntry extends ActiveRecord
 //        //print_r(Coroutine::getContext()->getConnections());
 //
 //        $query = "SELECT * FROM some_table";
-//        //\Co::sleep(3);
+//        //\Swoole\Coroutine\System::sleep(3);
 //        //$query = "SELECT SLEEP(1)";
 //        $Statement = $Connection1->prepare($query);
 //        $Statement->execute();
@@ -99,10 +99,10 @@ class LogEntry extends ActiveRecord
         //\Swoole\Coroutine::create($F);
 
 
-        //\co::sleep(1);
+        //\Swoole\Coroutine\System::sleep(1);
 
         //print 'After coroutine'.PHP_EOL;
-        //co::sleep(1);
+        //Swoole\Coroutine\System::sleep(1);
         //Coroutine::create($F);
 
 
@@ -136,7 +136,7 @@ class LogEntry extends ActiveRecord
         //self::LockManager()->acquire_lock('aa', LockInterface::LOCK_PW);
         self::LockManager()->acquire_lock($this, LockInterface::LOCK_PW);
         print $Request->getServer()->get_worker_id().' lock obtained: '.microtime(true).PHP_EOL;
-        //\co::sleep(3);
+        //\Swoole\Coroutine\System::sleep(3);
 
 
         print $Request->getServer()->get_worker_id().' end: '.microtime(true).PHP_EOL;

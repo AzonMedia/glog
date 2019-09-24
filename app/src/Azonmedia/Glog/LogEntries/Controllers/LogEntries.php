@@ -13,7 +13,7 @@ class LogEntries extends Controller
 
 //        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(1);
 //        //print $LogEntry->log_entry_content.PHP_EOL;
-//        //\Co::sleep(10);
+//        //\Swoole\Coroutine\System::sleep(10);
 //
 //
 //        $data = 'ok from '.$this->get_request()->getServer()->get_swoole_server()->worker_id;
