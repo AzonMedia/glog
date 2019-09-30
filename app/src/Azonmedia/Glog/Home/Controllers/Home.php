@@ -33,7 +33,6 @@ class Home extends Controller
         //$log_entry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
         //$log_entry->log_entry_content = 'content';
         //$log_entry->save();
-        
         return $Response;
     }
 
@@ -48,15 +47,18 @@ class Home extends Controller
 
     //     $query = "SELECT * FROM " . self::CONFIG_RUNTIME['main_table'];
 
-    //     $Statement = $Connection->prepare($query);
-    //     $Statement->execute();
-    //     $data = $Statement->fetchAll();
+    //     for ($i = 1; $i <= 3; $i++) {
+    //         $Statement = $Connection->prepare($query);
+    //         $Statement->execute();
+    //         $data = $Statement->fetchAll();
+
+    //         \Swoole\Coroutine\System::sleep(4);
+    //         echo "query executed\n";
+    //     }
 
     //     $endF = microtime(true);
 
     //     echo "executed in " . ($endF - $startF) . " s \n";
-
-    //     \Swoole\Coroutine\System::sleep(4);
     // }
 
     /**
