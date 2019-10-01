@@ -23,14 +23,11 @@ class LogEntry extends ActiveRecord
 
     protected const CONFIG_RUNTIME = [];
 
-    public function get_data() : array
-    {
-        return $this->entry_data;
-    }
-
-    public function get_accepted_microtime() : float
-    {
-        return $this->accepted_microtime;
+    public function test_con() {
+        //$Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR);
+        $queries = [ ['query' => 'SELECT 1', 'params' => []], ['query' => 'SELECT 2', 'params' => []] ];
+        $ret = MysqlConnection::execute_parallel_queries($queries);
+        print_r($ret);
     }
     
     public function _before_save()

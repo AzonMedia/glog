@@ -43,7 +43,7 @@ class Glog extends Application
     protected const CONFIG_DEFAULTS = [
         'swoole' => [ 
             'host'              => '0.0.0.0',
-            'port'              => 8082,
+            'port'              => 8081,
             'server_options'    => [ //this array will be passed to $SwooleHttpServer->set()
                 'worker_num'        => 4,//http workers
                 //Swoole\Coroutine::create(): Unable to use async-io in task processes, please set `task_enable_coroutine` to true.
@@ -76,12 +76,14 @@ class Glog extends Application
 
     public function execute() : int
     {
+
         $DependencyContainer = new Container();
-        kernel::set_di_container($DependencyContainer);
+        Kernel::set_di_container($DependencyContainer);
         
         $Watchdog = new \Azonmedia\Watchdog\Watchdog(new \Azonmedia\Watchdog\Backends\SwooleTableBackend());
-        kernel::set_watchdog($Watchdog);
+        Kernel::set_watchdog($Watchdog);
         
+
         $middlewares = [];
         // $middlewares[] = new RoutingMiddleware();
         // $middlewares[] = new FilteringMiddleware();
@@ -95,6 +97,7 @@ class Glog extends Application
 
 
         // disable coroutine for debugging
+        // $HttpServer->set(['enable_coroutine' => false,]);
         // $HttpServer->set(['enable_coroutine' => false,]);
 
         $ApplicationMiddleware = new ApplicationMiddleware();//blocks static content
@@ -151,21 +154,6 @@ class Glog extends Application
         //$WorkerHandler = new WorkerHandler($HttpServer);
         $WorkerHandler = new WorkerStart($HttpServer);
 
-        //https://github.com/swoole/swoole-docs/blob/master/get-started/examples/async_task.md
-        //$TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
-        //$TaskHandler = new TaskHandler(new StorageProviderFile($this->app_directory.'/data/log.txt'));
-
-        //$FinishHandler = new FinishHandler();
-
-        //$Pool = new Pool();
-        //$Pool->initialize(self::CONFIG_RUNTIME['pool']);
-        //$Pool = new Basic();
-        //$ConnectionFactory = ConnectionFactory::get_instance();
-        //$ConnectionFactory->set_connection_provider($Pool);
-        //$Pool = new Pool(self::CONFIG_RUNTIME['pool']);
-        //$ConnectionFactory =
-
-        //$Services = new Services
 
         $HttpServer->on('Connect', $ConnectHandler);
         $HttpServer->on('WorkerStart', $WorkerHandler);

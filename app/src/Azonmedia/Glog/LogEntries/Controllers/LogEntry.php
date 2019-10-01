@@ -47,8 +47,10 @@ class LogEntry extends Controller
         try {
             $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry( $id );
 
-            $LogEntry->log_entry_content = 'asasdasd';
-            $LogEntry->log_entry_content = 'asasdasd2';
+            //$LogEntry->test_con();
+
+            //$LogEntry->log_entry_content = 'asasdasd';
+            //$LogEntry->log_entry_content = 'asasdasd2';
             //print_r($LogEntry->get_property_old_values('log_entry_content'));
             //$LogEntry->get_property_old_values('log_entry_content')[0];
             //print $LogEntry->get_property_old_value('log_entry_content');

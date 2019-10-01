@@ -2,6 +2,8 @@
 
 namespace Azonmedia\Glog\LogEntries\Controllers;
 
+use Guzaba2\Coroutine\Coroutine;
+use Guzaba2\Database\Sql\Mysql\ConnectionCoroutine;
 use Guzaba2\Mvc\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Guzaba2\Translator\Translator as t;
