@@ -33,6 +33,7 @@ class Home extends Controller
         //$log_entry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
         //$log_entry->log_entry_content = 'content';
         //$log_entry->save();
+
         return $Response;
     }
 
@@ -41,24 +42,48 @@ class Home extends Controller
      */
     // private function testMysql()
     // {
-    //     $Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR1);
 
     //     $startF = microtime(true);
 
     //     $query = "SELECT * FROM " . self::CONFIG_RUNTIME['main_table'];
 
+    //     $Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR1);
+
     //     for ($i = 1; $i <= 3; $i++) {
+    //         //$Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR1);
+
     //         $Statement = $Connection->prepare($query);
     //         $Statement->execute();
     //         $data = $Statement->fetchAll();
 
     //         \Swoole\Coroutine\System::sleep(4);
+
     //         echo "query executed\n";
     //     }
 
     //     $endF = microtime(true);
 
     //     echo "executed in " . ($endF - $startF) . " s \n";
+    // }
+
+    /** to test APM time_waiting_for_connection set
+     * Azonmedia\Glog\Application\Glog.php worker_num = 1
+     * Guzaba2\Database\ConnectionProviders\Pool.php max_connections = 1
+     */
+    // private function test_apm_time_waiting_for_connection(){
+    //     $F = function() {
+    //         $query = "SELECT * FROM " . self::CONFIG_RUNTIME['main_table'];
+    //         $Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR1);
+
+    //         $Statement = $Connection->prepare($query);
+    //         $Statement->execute();
+    //         $data = $Statement->fetchAll();
+    //     };
+
+    //     $co_id_1 = Coroutine::create($F);
+    //     echo "First Coroutine id: {$co_id_1}\n";
+    //     $co_id_2 = Coroutine::create($F);
+    //     echo "Second Coroutine id: {$co_id_2}\n";
     // }
 
     /**
