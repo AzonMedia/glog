@@ -78,6 +78,8 @@ class Home extends Controller
     //         $Statement = $Connection->prepare($query);
     //         $Statement->execute();
     //         $data = $Statement->fetchAll();
+
+    //            unset($CR1);
     //     };
 
     //     $co_id_1 = Coroutine::create($F);
