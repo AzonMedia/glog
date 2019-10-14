@@ -29,6 +29,26 @@ class LogEntry extends ActiveRecord
         $ret = MysqlConnection::execute_parallel_queries($queries);
         print_r($ret);
     }
+
+    public function test_con_2() {
+//        for ($aa = 0; $aa < 4; $aa++) {
+//            $Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR);
+//            print $Connection->get_object_internal_id().PHP_EOL;
+//        }
+
+        $Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR1);
+        $this->test_con_3();
+
+        print $Connection->get_coroutine_id().PHP_EOL;
+        print 'query result: '.print_r($Connection->prepare('SELECT 1')->execute()->fetchAll(), TRUE).PHP_EOL;
+
+    }
+
+    public function test_con_3() {
+        $Connection = self::ConnectionFactory()->get_connection(MysqlConnection::class, $CR1);
+        //$Connection->free();
+        //$Connection->force_release();
+    }
     
     public function _before_save()
     {

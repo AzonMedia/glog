@@ -22,6 +22,10 @@ class LogEntries extends Controller
 //        $Response = parent::get_stream_ok_response($data);
 //        return $Response;
 
+//        $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry(0);
+//        $LogEntry->log_entry_content = 'asasdasdasdasd';
+//        $LogEntry->save();
+
         $Response = parent::get_structured_ok_response([]);
         $structure =& $Response->getBody()->getStructure();
         $structure['title'] = t::_('All entries');

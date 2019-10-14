@@ -48,6 +48,7 @@ class LogEntry extends Controller
             $LogEntry = new \Azonmedia\Glog\LogEntries\Models\LogEntry( $id );
 
             //$LogEntry->test_con();
+            //$LogEntry->test_con_2();
 
             //$LogEntry->log_entry_content = 'asasdasd';
             //$LogEntry->log_entry_content = 'asasdasd2';
