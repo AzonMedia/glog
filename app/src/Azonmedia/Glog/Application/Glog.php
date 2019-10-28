@@ -27,6 +27,7 @@ use Guzaba2\Kernel\Kernel;
 use Guzaba2\Http\RewritingMiddleware;
 use Guzaba2\Mvc\ExecutorMiddleware;
 use Guzaba2\Mvc\RoutingMiddleware;
+use Guzaba2\Orm\ActiveRecord;
 use Guzaba2\Swoole\ApplicationMiddleware;
 use Guzaba2\Mvc\RestMiddleware;
 //use Guzaba2\Swoole\WorkerHandler;
@@ -106,6 +107,7 @@ class Glog extends Application
         $Rewriter = new Rewriter(new RewritingRulesArray([]));
         $RewritingMiddleware = new RewritingMiddleware($HttpServer, $Rewriter);
 
+        /*
         $routing_table = [
             '/'                                     => [
                 Method::HTTP_GET                        => [Home::class, 'view'],
@@ -122,6 +124,20 @@ class Glog extends Application
                 Method::HTTP_GET                        => [LogEntries::class, 'view'],
             ],
         ];
+        */
+        $routing_table = [
+            '/'                                     => [
+                Method::HTTP_GET                        => [Home::class, 'view'],
+            ],
+            '/log-entries'                          => [
+                Method::HTTP_GET                        => [LogEntries::class, 'view'],
+            ],
+        ];
+        $default_routes = ActiveRecord::get_default_routes(array_keys(Kernel::get_registered_autoloader_paths()));
+        //die(print_r($default_routes));
+        //die('stop');
+        $routing_table = Router::merge_routes($routing_table, $default_routes);
+        //die(print_r($routing_table));
 
         $Router = new Router(new RoutingMapArray($routing_table));
         $RoutingMiddleware = new RoutingMiddleware($HttpServer, $Router);
