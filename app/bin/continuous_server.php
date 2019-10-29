@@ -21,7 +21,6 @@ use Guzaba2\Kernel\Kernel;
 use Guzaba2\Authorization\AuthorizationMiddleware;
 use Guzaba2\Authorization\FilteringMiddleware;
 use Guzaba2\Mvc\ExecutorMiddleware;
-use Guzaba2\Mvc\RoutingMiddleware;
 use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Guzaba2\Registry\Interfaces\RegistryInterface;
 use Monolog\Handler\StreamHandler;

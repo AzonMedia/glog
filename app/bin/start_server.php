@@ -7,6 +7,7 @@ use Azonmedia\Di\Container;
 use Azonmedia\Glog\Application\Glog;
 use Azonmedia\Registry\Interfaces\RegistryBackendInterface;
 use Azonmedia\Registry\Registry;
+use Azonmedia\Registry\RegistryBackendArray;
 use Azonmedia\Registry\RegistryBackendEnv;
 use Guzaba2\Database\ConnectionFactory;
 use Guzaba2\Database\ConnectionProviders\Pool;
@@ -14,7 +15,7 @@ use Guzaba2\Kernel\Kernel;
 use Guzaba2\Authorization\AuthorizationMiddleware;
 use Guzaba2\Authorization\FilteringMiddleware;
 use Guzaba2\Mvc\ExecutorMiddleware;
-use Guzaba2\Mvc\RoutingMiddleware;
+use Guzaba2\Routing\RoutingMiddleware;
 use Azonmedia\Glog\Middleware\ServingMiddleware;
 use Guzaba2\Registry\Interfaces\RegistryInterface;
 use Monolog\Formatter\LineFormatter;
@@ -56,9 +57,8 @@ const APP_CONFIG = [
 
     chdir($app_directory);
 
-    $RegistryBackend = new RegistryBackendEnv('');
+    $RegistryBackend = new RegistryBackendArray(realpath(__DIR__ . '/../registry'));
     $Registry = new Registry($RegistryBackend);
-
 
     $Logger = new Logger('main_logger');
     $Formatter = new LineFormatter(

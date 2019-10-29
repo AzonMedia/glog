@@ -1,0 +1,54 @@
+<?php
+
+// Example local registry config
+// rename to local.php to use
+// can hold sensitive environment dependent data that won't be pushed to git
+use Azonmedia\Glog\Application\RedisConnection;
+use Guzaba2\Orm\Store\Nosql\Redis;
+
+return [
+    \Guzaba2\Application\Application::class => [
+        'deployment'   => 'development',
+    ],
+
+    \Azonmedia\Glog\Application\MysqlConnection::class => [
+        'host'      => 'mysql',
+        'port'      => 3306,
+        'user'      => 'root',
+        'password'  => '1234',
+        'database'  => 'glog',
+        'tprefix'   => '',
+    ],
+    \Azonmedia\Glog\Application\RedisConnection::class => [
+        'host'      => 'redis',
+        'port'      => 6379,
+        'timeout' => 1.5,
+        'password' => '',
+        'database' => 0,
+        'services' => [
+            'ConnectionFactory'
+        ],
+        'expiry_time' => 3600,
+    ],
+
+    \Guzaba2\Database\Nosql\Redis\ConnectionCoroutine::class => [
+        'host'      => 'redis',
+        'port'      => 6379,
+        'timeout' => 1.5,
+        'password' => '',
+        'database' => 0,
+        'services' => [
+            'ConnectionFactory'
+        ],
+        'expiry_time' => 3600,
+    ],
+    \Guzaba2\Di\Container::class => [
+        'OrmStore'                      => [
+            'class'                         => Redis::class,
+            'args'                          => [
+                'FallbackStore'                 => 'NullOrmStore',
+                'connection_class'              => RedisConnection::class,
+            ],
+        ],
+    ],
+];
