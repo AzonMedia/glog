@@ -1,0 +1,41 @@
+[2019-10-16T15:06:54.217091+00:00] main_logger.EMERGENCY: Exception Guzaba2\Kernel\Exceptions\AutoloadException: The file /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Orm/ActiveRecordDefaultController.php is readable but does not contain the class/interface/trait Guzaba2\Orm\ActiveRecordDefaultController. Please check the class and namespace declarations. in /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Kernel/Kernel.php#587
+#0 [internal function]: Guzaba2\Kernel\Kernel::autoloader('Guzaba2\\Orm\\Act...')
+#1 [internal function]: spl_autoload_call('Guzaba2\\Orm\\Act...')
+#2 /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Kernel/Kernel.php(585): class_exists('Guzaba2\\Orm\\Act...')
+#3 /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Kernel/Kernel.php(547): Guzaba2\Kernel\Kernel::autoloader('Guzaba2\\Orm\\Act...')
+#4 /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Kernel/Kernel.php(243): Guzaba2\Kernel\Kernel::load_all_classes()
+#5 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(70): Guzaba2\Kernel\Kernel::run(Object(Azonmedia\Glog\Application\Glog))
+#6 /home/local/glog/glog/app/bin/start_server.php(93): Azonmedia\Glog\Application\Glog->__construct('/home/local/glo...')
+#7 /home/local/glog/glog/app/bin/start_server.php(96): Azonmedia\Glog\{closure}()
+#8 {main}  
+[2019-10-16T15:07:16.115222+00:00] main_logger.EMERGENCY: Worker #-1: Exception Error: Call to undefined method Guzaba2\Kernel\Kernel::get_loaded_class() in guzaba.source:///home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Orm/ActiveRecord.php#743
+#0 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(133): Guzaba2\Orm\ActiveRecord::get_default_routes(Array)
+#1 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(75): Azonmedia\Glog\Application\Glog->execute()
+#2 /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Kernel/Kernel.php(245): Azonmedia\Glog\Application\Glog->__invoke()
+#3 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(70): Guzaba2\Kernel\Kernel::run(Object(Azonmedia\Glog\Application\Glog))
+#4 /home/local/glog/glog/app/bin/start_server.php(93): Azonmedia\Glog\Application\Glog->__construct('/home/local/glo...')
+#5 /home/local/glog/glog/app/bin/start_server.php(96): Azonmedia\Glog\{closure}()
+#6 {main}  
+[2019-10-16T15:07:34.066964+00:00] main_logger.EMERGENCY: Worker #-1: Exception Error: Call to undefined method Guzaba2\Base\Traits\SupportsObjectInternalId::get_default_route() in guzaba.source:///home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Orm/ActiveRecord.php#749
+#0 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(133): Guzaba2\Orm\ActiveRecord::get_default_routes(Array)
+#1 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(75): Azonmedia\Glog\Application\Glog->execute()
+#2 /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Kernel/Kernel.php(245): Azonmedia\Glog\Application\Glog->__invoke()
+#3 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(70): Guzaba2\Kernel\Kernel::run(Object(Azonmedia\Glog\Application\Glog))
+#4 /home/local/glog/glog/app/bin/start_server.php(93): Azonmedia\Glog\Application\Glog->__construct('/home/local/glo...')
+#5 /home/local/glog/glog/app/bin/start_server.php(96): Azonmedia\Glog\{closure}()
+#6 {main}  
+[2019-10-16T15:08:15.682568+00:00] main_logger.EMERGENCY: Worker #-1: Exception Error: Call to undefined method Guzaba2\Base\Traits\SupportsObjectInternalId::get_default_route() in guzaba.source:///home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Orm/ActiveRecord.php#749
+#0 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(133): Guzaba2\Orm\ActiveRecord::get_default_routes(Array)
+#1 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(75): Azonmedia\Glog\Application\Glog->execute()
+#2 /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Kernel/Kernel.php(245): Azonmedia\Glog\Application\Glog->__invoke()
+#3 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(70): Guzaba2\Kernel\Kernel::run(Object(Azonmedia\Glog\Application\Glog))
+#4 /home/local/glog/glog/app/bin/start_server.php(93): Azonmedia\Glog\Application\Glog->__construct('/home/local/glo...')
+#5 /home/local/glog/glog/app/bin/start_server.php(96): Azonmedia\Glog\{closure}()
+#6 {main}  
+[2019-10-16T15:51:19.670824+00:00] main_logger.EMERGENCY: Worker #-1: Exception Error: Undefined class constant 'PATCH' in guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php#136
+#0 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(75): Azonmedia\Glog\Application\Glog->execute()
+#1 /home/local/glog/glog/vendor/azonmedia/guzaba2/src/Guzaba2/Kernel/Kernel.php(245): Azonmedia\Glog\Application\Glog->__invoke()
+#2 guzaba.source:///home/local/glog/glog/app/src/Azonmedia/Glog/Application/Glog.php(70): Guzaba2\Kernel\Kernel::run(Object(Azonmedia\Glog\Application\Glog))
+#3 /home/local/glog/glog/app/bin/start_server.php(93): Azonmedia\Glog\Application\Glog->__construct('/home/local/glo...')
+#4 /home/local/glog/glog/app/bin/start_server.php(96): Azonmedia\Glog\{closure}()
+#5 {main}  

@@ -18,7 +18,7 @@ class LogEntry extends ActiveRecord
             'ConnectionFactory'
         ],
         'main_table'    => 'log_entries',//defines the storage key
-
+        'default_route' => '/log-entry',
     ];
 
     protected const CONFIG_RUNTIME = [];
